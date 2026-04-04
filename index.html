@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forcen AI - AI Strategy & Implementation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066ff;
+            --secondary: #00d4ff;
+            --dark: #0f0f1e;
+            --light: #ffffff;
+            --gray: #a8aac0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        nav a {
+            color: var(--gray);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        .cta-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            margin-top: 70px;
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.08) 0%, transparent 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 102, 255, 0.1);
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 102, 255, 0.15);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            background: rgba(0, 102, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-header {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), transparent);
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0, 102, 255, 0.15);
+            margin: -2rem -2rem 1.5rem -2rem;
+        }
+
+        .case-company {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-result {
+            background: rgba(0, 212, 255, 0.08);
+            border-left: 2px solid var(--secondary);
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .result-metric {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .founder-card {
+            background: rgba(0, 102, 255, 0.05);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .founder-card h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .founder-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-item {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .skill-item:before {
+            content: "→ ";
+            color: var(--secondary);
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 102, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .quote {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .author {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .role {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-value {
+            font-weight: 500;
+        }
+
+        .contact-value a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            border-radius: 50%;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(0, 102, 255, 0.15);
+            padding: 0.7rem;
+            color: white;
+            border-radius: 4px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 102, 255, 0.05);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        footer {
+            background: rgba(15, 15, 30, 0.8);
+            border-top: 1px solid rgba(0, 102, 255, 0.1);
+            padding: 2rem;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            nav {
+                width: 100%;
+                display: none;
+            }
+
+            nav.active {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .about-content,
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Forcen AI</div>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="cta-btn">Let's Talk</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>AI that actually solves problems</h1>
+        <p class="hero-sub">Strategy, implementation, and optimization for businesses ready to move faster with intelligent automation.</p>
+        <div class="hero-buttons">
+            <button class="cta-btn">Get Started</button>
+            <button class="cta-btn btn-secondary">See Our Work</button>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">What We Do</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="service-icon">🎯</div>
+                <h3>AI Strategy</h3>
+                <p>Figure out where AI actually fits in your business. We help you identify opportunities, assess readiness, and build a roadmap that makes sense.</p>
+            </div>
+            <div class="card">
+                <div class="service-icon">⚙️</div>
+                <h3>Implementation</h3>
+                <p>Get from idea to working system. We handle technical architecture, integration with your existing tools, and smooth handoff to your team.</p>
+            </div>
+            <div class="card">
+                <div class="service-icon">📊</div>
+                <h3>Data Foundation</h3>
+                <p>AI only works with good data. We help organize, clean, and structure your data so your models actually perform.</p>
+            </div>
+            <div class="card">
+                <div class="service-icon">🔍</div>
+                <h3>Optimization</h3>
+                <p>Systems drift. We monitor performance, identify degradation, and keep your AI delivering real value over time.</p>
+            </div>
+            <div class="card">
+                <div class="service-icon">👥</div>
+                <h3>Team Enablement</h3>
+                <p>Your team needs to understand the systems they're using. We provide training focused on practical application.</p>
+            </div>
+            <div class="card">
+                <div class="service-icon">🛡️</div>
+                <h3>Responsible AI</h3>
+                <p>Bias, fairness, and compliance matter. We ensure your AI systems operate ethically and within regulatory constraints.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <h2 class="section-title">Recent Work</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="case-header">
+                    <div class="case-company">Supply Chain Operations</div>
+                    <h3>Demand Forecasting System</h3>
+                </div>
+                <p>A mid-size distributor was losing inventory visibility across multiple warehouses. Manual forecasting was causing stockouts and overstock situations. We built an ML system that ingests sales data, seasonality, and supplier lead times to generate accurate 30-day forecasts.</p>
+                <div class="case-result">
+                    <div class="result-metric">38%</div>
+                    <div class="result-label">Reduction in excess inventory</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gray);">Timeline: 4 months | Implementation: AWS, Python, ongoing optimization</p>
+            </div>
+
+            <div class="card">
+                <div class="case-header">
+                    <div class="case-company">Financial Services</div>
+                    <h3>Transaction Monitoring</h3>
+                </div>
+                <p>Manual review of suspicious transactions was creating bottlenecks and regulatory risk. We implemented an anomaly detection system that flags unusual patterns in real-time, reducing false positives while catching actual fraud.</p>
+                <div class="case-result">
+                    <div class="result-metric">72%</div>
+                    <div class="result-label">Faster alert response time</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gray);">Timeline: 5 months | Real-time processing: 500K+ transactions daily</p>
+            </div>
+
+            <div class="card">
+                <div class="case-header">
+                    <div class="case-company">Manufacturing</div>
+                    <h3>Quality Control Automation</h3>
+                </div>
+                <p>Visual inspection was slow and inconsistent. We deployed computer vision to catch defects on the production line in real-time, reducing manual inspection workload and catching issues faster.</p>
+                <div class="case-result">
+                    <div class="result-metric">91%</div>
+                    <div class="result-label">Defect detection accuracy</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gray);">Timeline: 3 months | Edge deployment: Factory floor cameras</p>
+            </div>
+
+            <div class="card">
+                <div class="case-header">
+                    <div class="case-company">Customer Support</div>
+                    <h3>Ticket Routing & Prioritization</h3>
+                </div>
+                <p>Support tickets were being routed manually, causing delays on urgent issues. We built an NLP system that reads ticket content, understands intent, and automatically routes to the right team while flagging high-priority cases.</p>
+                <div class="case-result">
+                    <div class="result-metric">45%</div>
+                    <div class="result-label">Faster average resolution time</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gray);">Timeline: 2 months | Language support: English, Spanish, Portuguese</p>
+            </div>
+
+            <div class="card">
+                <div class="case-header">
+                    <div class="case-company">Healthcare Administration</div>
+                    <h3>Insurance Claims Processing</h3>
+                </div>
+                <p>Claim processing was taking weeks due to manual review. We implemented a document extraction and classification system that automatically pulls key information and flags cases requiring human review.</p>
+                <div class="case-result">
+                    <div class="result-metric">61%</div>
+                    <div class="result-label">Reduction in processing time</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gray);">Timeline: 6 months | HIPAA compliant: On-premises deployment</p>
+            </div>
+
+            <div class="card">
+                <div class="case-header">
+                    <div class="case-company">Sales & Marketing</div>
+                    <h3>Lead Scoring</h3>
+                </div>
+                <p>Sales team was spending time on unqualified leads. We built a model that scores leads based on behavior, engagement, and company data, helping them focus on prospects most likely to convert.</p>
+                <div class="case-result">
+                    <div class="result-metric">34%</div>
+                    <div class="result-label">Increase in conversion rate</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gray);">Timeline: 3 months | Integration: Salesforce, HubSpot</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>We build AI systems that work in the real world</h3>
+                <p>Most AI projects fail because they're built in a lab by people who don't understand the business. We're different. We start by understanding your actual constraints, your data, your team, and your timelines.</p>
+                <p>Then we build pragmatic systems that integrate cleanly with what you already have, that your team can actually use and maintain, and that deliver measurable results.</p>
+                <p>We've worked across supply chain, finance, manufacturing, healthcare, and SaaS. Every industry has different challenges. We bring that experience to your problem.</p>
+
+                <div class="founder-card">
+                    <h4>👨‍💼 Alfonso Forcén — Founder</h4>
+                    <p>Telecommunications engineer with an MBA in international management. Previously at Apple, focused on supply chain analytics. Now helps companies navigate AI implementation with pragmatic strategy and technical depth.</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="card">
+                    <h3 style="margin-bottom: 1.5rem;">Our Approach</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">Machine Learning</div>
+                        <div class="skill-item">Data Engineering</div>
+                        <div class="skill-item">Computer Vision</div>
+                        <div class="skill-item">NLP & LLMs</div>
+                        <div class="skill-item">Cloud Architecture</div>
+                        <div class="skill-item">Process Automation</div>
+                        <div class="skill-item">Anomaly Detection</div>
+                        <div class="skill-item">Forecasting</div>
+                        <div class="skill-item">Responsible AI</div>
+                        <div class="skill-item">Model Monitoring</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2 class="section-title">What clients say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"They didn't just deliver a system, they taught us how to think about ML. That made all the difference."</p>
+                <div class="author">Operations Director, Supply Chain Company</div>
+                <div class="role">Worked on demand forecasting system</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"We've worked with other consultants who delivered black boxes. Alfonso's team explained everything and set us up to maintain it ourselves."</p>
+                <div class="author">CTO, Financial Services</div>
+                <div class="role">Worked on transaction monitoring</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"The timeline was tight and they delivered without cutting corners. Quality work, realistic scope, no over-promising."</p>
+                <div class="author">Plant Manager, Manufacturing</div>
+                <div class="role">Worked on quality control automation</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"We called them during the project because things weren't working. They actually dug in and fixed it. That's when I knew they cared."</p>
+                <div class="author">VP Support Operations</div>
+                <div class="role">Worked on ticket routing system</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"They understood healthcare compliance requirements better than some healthcare consultants we've worked with. Refreshing."</p>
+                <div class="author">Compliance Officer, Healthcare</div>
+                <div class="role">Worked on claims processing</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"We were skeptical about AI at first. Alfonso answered every question honestly, including when he said 'this won't work' for certain use cases."</p>
+                <div class="author">VP Sales, SaaS Company</div>
+                <div class="role">Worked on lead scoring</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-section">
+            <div class="contact-info">
+                <h3>Let's Talk</h3>
+
+                <div class="contact-item">
+                    <div class="contact-label">WhatsApp</div>
+                    <div class="contact-value">
+                        <a href="https://wa.me/34658207812" target="_blank">+34 658 207 812</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">
+                        <a href="https://linkedin.com/in/alfonsoforcen" target="_blank">Alfonso Forcén</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">
+                        <a href="mailto:alforcen2@gmail.com">alforcen2@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">Cork, Ireland</div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/alfonsoforcen" class="social-link" title="LinkedIn">in</a>
+                </div>
+            </div>
+
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company (optional)</label>
+                    <input type="text" id="company" name="company">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">What's on your mind?</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="cta-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Forcen AI. Design and implementation.</p>
+            <div class="footer-links">
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Form handling
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thanks for reaching out. I\'ll get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
