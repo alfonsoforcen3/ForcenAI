@@ -434,6 +434,20 @@
     /* ════════════════════════════
        RESPONSIVE
     ════════════════════════════ */
+    /* lang toggle */
+    .lang-toggle {
+      display: flex; align-items: center; gap: 4px; margin-right: 16px;
+      padding: 4px; background: rgba(250,249,247,0.03); border-radius: 6px;
+      border: 1px solid rgba(250,249,247,0.05);
+    }
+    .lang-toggle button {
+      background: none; border: none; color: var(--muted); cursor: pointer;
+      padding: 4px 10px; font-size: 12px; font-weight: 700; border-radius: 4px;
+      transition: all 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .lang-toggle button.active { background: var(--accent); color: #fff; }
+    .lang-toggle button:hover:not(.active) { color: var(--text); background: rgba(250,249,247,0.05); }
+
     @media (max-width: 900px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
@@ -484,12 +498,18 @@
       ForcenAI
     </a>
     <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#services" data-i18n="nav_services">Servicios</a></li>
+      <li><a href="#process" data-i18n="nav_process">Proceso</a></li>
+      <li><a href="#about" data-i18n="nav_about">Sobre mí</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
     </ul>
-    <a href="#contact" class="btn btn-primary nav-cta">Start a Project</a>
+    <div style="display:flex; align-items:center;">
+      <div class="lang-toggle">
+        <button onclick="setLanguage('es')" id="btn-es" class="active" data-i18n="lang_es">🇪🇸 ES</button>
+        <button onclick="setLanguage('en')" id="btn-en" data-i18n="lang_en">🇬🇧 EN</button>
+      </div>
+      <a href="#contact" class="btn btn-primary nav-cta" data-i18n="nav_cta">Comenzar Proyecto</a>
+    </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -499,11 +519,15 @@
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">✕</button>
-  <a href="#services" class="mobile-link">Services</a>
-  <a href="#process" class="mobile-link">Process</a>
-  <a href="#about" class="mobile-link">About</a>
-  <a href="#contact" class="mobile-link">Contact</a>
-  <a href="#contact" class="btn btn-primary" style="margin-top:8px">Start a Project</a>
+  <a href="#services" class="mobile-link" data-i18n="nav_services">Servicios</a>
+  <a href="#process" class="mobile-link" data-i18n="nav_process">Proceso</a>
+  <a href="#about" class="mobile-link" data-i18n="nav_about">Sobre mí</a>
+  <a href="#contact" class="mobile-link" data-i18n="nav_contact">Contacto</a>
+  <a href="#contact" class="btn btn-primary" style="margin-top:8px" data-i18n="nav_cta">Comenzar Proyecto</a>
+  <div class="lang-toggle" style="margin-top:24px; margin-right:0;">
+    <button onclick="setLanguage('es')" id="btn-es-mob" class="active">🇪🇸 ES</button>
+    <button onclick="setLanguage('en')" id="btn-en-mob">🇬🇧 EN</button>
+  </div>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -513,19 +537,19 @@
   <div class="container">
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-badge fade-up">
+        <div class="hero-badge fade-up" data-i18n="hero_badge">
           <span class="hero-badge-dot"></span>
-          Claude-Powered AI Consultancy
+          Consultoría de IA impulsada por Claude
         </div>
-        <h1 class="hero-h1 fade-up delay-1">
-          We Build AI Agents That Work<br/><span>While You Sleep</span>
+        <h1 class="hero-h1 fade-up delay-1" data-i18n="hero_title">
+          Construimos Agentes de IA que Trabajan<br/><span>Mientras Duermes</span>
         </h1>
-        <p class="hero-sub fade-up delay-2">
-          ForcenAI specialises in Claude-powered automation — custom agents, multi-agent dispatch systems, and MCP integrations for businesses that want to move faster.
+        <p class="hero-sub fade-up delay-2" data-i18n="hero_sub">
+          ForcenAI se especializa en automatización basada en Claude: agentes personalizados, sistemas de despacho multi-agente e integraciones MCP para empresas que quieren avanzar más rápido.
         </p>
         <div class="hero-btns fade-up delay-3">
-          <a href="#services" class="btn btn-primary">See Our Services</a>
-          <a href="#about" class="btn btn-ghost">View Case Studies</a>
+          <a href="#services" class="btn btn-primary" data-i18n="hero_cta_primary">Ver Servicios</a>
+          <a href="#about" class="btn btn-ghost" data-i18n="hero_cta_secondary">Ver Casos Prácticos</a>
         </div>
       </div>
 
@@ -609,9 +633,9 @@
 <section id="services" class="section">
   <div class="container">
     <div class="services-header fade-up">
-      <p class="section-label">What We Do</p>
-      <h2 class="section-title">Services Built Around<br/>Agentic AI</h2>
-      <p class="section-sub">From a single automation to enterprise-scale multi-agent pipelines — we deliver production-ready Claude integrations.</p>
+      <p class="section-label" data-i18n="services_label">What We We Do</p>
+      <h2 class="section-title" data-i18n="services_title">Services Built Around<br/>Agentic AI</h2>
+      <p class="section-sub" data-i18n="services_sub">From a single automation to enterprise-scale multi-agent pipelines — we deliver production-ready Claude integrations.</p>
     </div>
     <div class="services-grid">
 
@@ -619,48 +643,48 @@
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l2 2 4-4"/></svg>
         </div>
-        <h3 class="service-title">AI Agent Creation</h3>
-        <p class="service-desc">Custom Claude-powered agents that handle complex workflows autonomously. From single-purpose bots to full agentic systems.</p>
+        <h3 class="service-title" data-i18n="service1_title">AI Agent Creation</h3>
+        <p class="service-desc" data-i18n="service1_desc">Custom Claude-powered agents that handle complex workflows autonomously. From single-purpose bots to full agentic systems.</p>
       </div>
 
       <div class="service-card fade-up delay-2">
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v4M5 17l5-4M19 17l-5-4"/></svg>
         </div>
-        <h3 class="service-title">Dispatch Architecture</h3>
-        <p class="service-desc">Multi-agent orchestration systems that route tasks intelligently across specialised agents — just like Claude's own Dispatch.</p>
+        <h3 class="service-title" data-i18n="service2_title">Dispatch Architecture</h3>
+        <p class="service-desc" data-i18n="service2_desc">Multi-agent orchestration systems that route tasks intelligently across specialised agents — just like Claude's own Dispatch.</p>
       </div>
 
       <div class="service-card fade-up delay-3">
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
-        <h3 class="service-title">Claude Integration</h3>
-        <p class="service-desc">Embed Claude into your existing products, APIs, and internal tools. Fast deployment, production-ready from day one.</p>
+        <h3 class="service-title" data-i18n="service3_title">Claude Integration</h3>
+        <p class="service-desc" data-i18n="service3_desc">Embed Claude into your existing products, APIs, and internal tools. Fast deployment, production-ready from day one.</p>
       </div>
 
       <div class="service-card fade-up delay-1">
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
         </div>
-        <h3 class="service-title">MCP Development</h3>
-        <p class="service-desc">Custom Model Context Protocol servers that give your agents access to any system, database, or API you already use.</p>
+        <h3 class="service-title" data-i18n="service4_title">MCP Development</h3>
+        <p class="service-desc" data-i18n="service4_desc">Custom Model Context Protocol servers that give your agents access to any system, database, or API you already use.</p>
       </div>
 
       <div class="service-card fade-up delay-2">
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M2 20h20M6 20V10M12 20V4M18 20v-6"/></svg>
         </div>
-        <h3 class="service-title">AI Strategy Consulting</h3>
-        <p class="service-desc">Roadmaps and frameworks to identify where AI agents deliver the most ROI in your organisation's workflows.</p>
+        <h3 class="service-title" data-i18n="service5_title">AI Strategy Consulting</h3>
+        <p class="service-desc" data-i18n="service5_desc">Roadmaps and frameworks to identify where AI agents deliver the most ROI in your organisation's workflows.</p>
       </div>
 
       <div class="service-card fade-up delay-3">
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <h3 class="service-title">Training &amp; Enablement</h3>
-        <p class="service-desc">Upskill your team to work alongside AI agents effectively. Workshops, playbooks, and ongoing support to keep pace.</p>
+        <h3 class="service-title" data-i18n="service6_title">Training &amp; Enablement</h3>
+        <p class="service-desc" data-i18n="service6_desc">Upskill your team to work alongside AI agents effectively. Workshops, playbooks, and ongoing support to keep pace.</p>
       </div>
 
     </div>
@@ -671,31 +695,31 @@
 <section id="why" class="section">
   <div class="container">
     <div class="fade-up">
-      <p class="section-label">Our Foundation</p>
-      <h2 class="section-title">Why We Build on Claude</h2>
-      <p class="section-sub">Not all models are equal when it comes to agentic work. We chose Claude for every reason that matters.</p>
+      <p class="section-label" data-i18n="why_label">Our Foundation</p>
+      <h2 class="section-title" data-i18n="why_title">Why We Build on Claude</h2>
+      <p class="section-sub" data-i18n="why_sub">Not all models are equal when it comes to agentic work. We chose Claude for every reason that matters.</p>
     </div>
     <div class="why-grid">
       <div class="why-card fade-up delay-1">
         <div class="why-icon">
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h3 class="why-title">Safest &amp; Most Capable</h3>
-        <p class="why-desc">Claude consistently leads safety benchmarks without sacrificing performance. It reasons carefully, refuses appropriately, and stays on task.</p>
+        <h3 class="why-title" data-i18n="why_card1_title">Safest &amp; Most Capable</h3>
+        <p class="why-desc" data-i18n="why_card1_desc">Claude consistently leads safety benchmarks without sacrificing performance. It reasons carefully, refuses appropriately, and stays on task.</p>
       </div>
       <div class="why-card fade-up delay-2">
         <div class="why-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M20 12h2M2 12h2M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41"/></svg>
         </div>
-        <h3 class="why-title">Best for Agents</h3>
-        <p class="why-desc">Claude's long context window, tool use fidelity, and instruction-following make it uniquely suited to autonomous, multi-step agentic tasks.</p>
+        <h3 class="why-title" data-i18n="why_card2_title">Best for Agents</h3>
+        <p class="why-desc" data-i18n="why_card2_desc">Claude's long context window, tool use fidelity, and instruction-following make it uniquely suited to autonomous, multi-step agentic tasks.</p>
       </div>
       <div class="why-card fade-up delay-3">
         <div class="why-icon">
           <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <h3 class="why-title">Enterprise-Ready</h3>
-        <p class="why-desc">Anthropic's enterprise tier offers the controls, compliance guarantees, and SLAs that serious organisations need before deploying at scale.</p>
+        <h3 class="why-title" data-i18n="why_card3_title">Enterprise-Ready</h3>
+        <p class="why-desc" data-i18n="why_card3_desc">Anthropic's enterprise tier offers the controls, compliance guarantees, and SLAs that serious organisations need before deploying at scale.</p>
       </div>
     </div>
   </div>
@@ -705,30 +729,30 @@
 <section id="process" class="section">
   <div class="container">
     <div class="process-header fade-up">
-      <p class="section-label">How We Work</p>
-      <h2 class="section-title">From Idea to Deployed Agent</h2>
-      <p class="section-sub">A clear, collaborative process built for speed without cutting corners.</p>
+      <p class="section-label" data-i18n="process_label">How We Work</p>
+      <h2 class="section-title" data-i18n="process_title">From Idea to Deployed Agent</h2>
+      <p class="section-sub" data-i18n="process_sub">A clear, collaborative process built for speed without cutting corners.</p>
     </div>
     <div class="process-steps">
       <div class="process-step fade-up delay-1">
         <div class="step-num">1</div>
-        <h3 class="step-title">Discover</h3>
-        <p class="step-desc">We map your workflows, identify automation opportunities, and define scope with clear success metrics.</p>
+        <h3 class="step-title" data-i18n="step1_title">Discover</h3>
+        <p class="step-desc" data-i18n="step1_desc">We map your workflows, identify automation opportunities, and define scope with clear success metrics.</p>
       </div>
       <div class="process-step fade-up delay-2">
         <div class="step-num">2</div>
-        <h3 class="step-title">Architect</h3>
-        <p class="step-desc">We design the agent system — tools, prompts, memory strategy, and integration points — before writing a line of code.</p>
+        <h3 class="step-title" data-i18n="step2_title">Architect</h3>
+        <p class="step-desc" data-i18n="step2_desc">We design the agent system — tools, prompts, memory strategy, and integration points — before writing a line of code.</p>
       </div>
       <div class="process-step fade-up delay-3">
         <div class="step-num">3</div>
-        <h3 class="step-title">Build &amp; Test</h3>
-        <p class="step-desc">Iterative development with continuous eval loops. Every agent is stress-tested on edge cases before handoff.</p>
+        <h3 class="step-title" data-i18n="step3_title">Build &amp; Test</h3>
+        <p class="step-desc" data-i18n="step3_desc">Iterative development with continuous eval loops. Every agent is stress-tested on edge cases before handoff.</p>
       </div>
       <div class="process-step fade-up delay-4">
         <div class="step-num">4</div>
-        <h3 class="step-title">Deploy &amp; Monitor</h3>
-        <p class="step-desc">We ship to production, set up observability dashboards, and provide ongoing optimisation support post-launch.</p>
+        <h3 class="step-title" data-i18n="step4_title">Deploy &amp; Monitor</h3>
+        <p class="step-desc" data-i18n="step4_desc">We ship to production, set up observability dashboards, and provide ongoing optimisation support post-launch.</p>
       </div>
     </div>
   </div>
@@ -761,23 +785,23 @@
         </div>
       </div>
       <div class="about-text fade-up delay-2">
-        <p class="section-label">About</p>
-        <h2>Hola, I'm <span style="color:var(--accent)">Alfonso</span></h2>
-        <p>I'm the founder of ForcenAI — an AI agent consultancy focused exclusively on Claude-powered systems. I've spent years working at the intersection of software engineering and applied AI, and I started ForcenAI to help businesses move beyond chatbots into real agentic automation.</p>
-        <p>Whether it's a single workflow agent or a complex multi-agent dispatch system, every project gets my direct attention. <strong>Quality over volume.</strong></p>
-        <p>📍 <strong>Based in Zaragoza, Spain.</strong> Working with teams globally — remote-first, async-friendly.</p>
+        <p class="section-label" data-i18n="about_label">About</p>
+        <h2 data-i18n="about_title">Hola, I'm <span style="color:var(--accent)">Alfonso</span></h2>
+        <p data-i18n="about_text1">I'm the founder of ForcenAI — an AI agent consultancy focused exclusively on Claude-powered systems. I've spent years working at the intersection of software engineering and applied AI, and I started ForcenAI to help businesses move beyond chatbots into real agentic automation.</p>
+        <p data-i18n="about_text2">Whether it's a single workflow agent or a complex multi-agent dispatch system, every project gets my direct attention. <strong>Quality over volume.</strong></p>
+        <p data-i18n="about_text3">📍 <strong>Based in Zaragoza, Spain.</strong> Working with teams globally — remote-first, async-friendly.</p>
         <div class="about-stats">
           <div class="stat">
             <div class="stat-num">30+</div>
-            <div class="stat-label">Agents Deployed</div>
+            <div class="stat-label" data-i18n="stat1_label">Agents Deployed</div>
           </div>
           <div class="stat">
             <div class="stat-num">100%</div>
-            <div class="stat-label">Claude-Powered</div>
+            <div class="stat-label" data-i18n="stat2_label">Claude-Powered</div>
           </div>
           <div class="stat">
             <div class="stat-num">Global</div>
-            <div class="stat-label">Client Reach</div>
+            <div class="stat-label" data-i18n="stat3_label">Client Reach</div>
           </div>
         </div>
       </div>
@@ -790,9 +814,9 @@
   <div class="container">
     <div class="contact-inner">
       <div class="contact-info fade-up">
-        <p class="section-label">Get in Touch</p>
-        <h2>Let's Build Something<br/><span style="color:var(--accent)">Together</span></h2>
-        <p>Have a workflow that needs automating? A product that needs Claude embedded? Or just want to explore what's possible? Drop a message and I'll get back to you within 24 hours.</p>
+        <p class="section-label" data-i18n="contact_label">Get in Touch</p>
+        <h2 data-i18n="contact_title">Let's Build Something<br/><span style="color:var(--accent)">Together</span></h2>
+        <p data-i18n="contact_sub">Have a workflow that needs automating? A product that needs Claude embedded? Or just want to explore what's possible? Drop a message and I'll get back to you within 24 hours.</p>
         <a href="mailto:alforcen2@gmail.com" class="contact-email">
           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           alforcen2@gmail.com
@@ -801,19 +825,19 @@
       <div class="fade-up delay-2">
         <form id="contactForm" novalidate>
           <div class="form-group">
-            <label for="name">Your Name</label>
+            <label for="name" data-i18n="form_name">Your Name</label>
             <input type="text" id="name" name="name" placeholder="Ada Lovelace" required />
           </div>
           <div class="form-group">
-            <label for="email">Email Address</label>
+            <label for="email" data-i18n="form_email">Email Address</label>
             <input type="email" id="email" name="email" placeholder="ada@example.com" required />
           </div>
           <div class="form-group">
-            <label for="message">Message</label>
+            <label for="message" data-i18n="form_message">Message</label>
             <textarea id="message" name="message" placeholder="Tell me about your project or workflow..." required></textarea>
           </div>
-          <button type="submit" class="btn-submit">Send Message →</button>
-          <div class="form-success" id="formSuccess">
+          <button type="submit" class="btn-submit" data-i18n="form_submit">Send Message →</button>
+          <div class="form-success" id="formSuccess" data-i18n="form_success">
             ✓ Message received! I'll be in touch within 24 hours.
           </div>
         </form>
@@ -840,7 +864,7 @@
           </svg>
           ForcenAI
         </a>
-        <p class="footer-tagline">Building the agentic future, one workflow at a time.</p>
+        <p class="footer-tagline" data-i18n="footer_tagline">Building the agentic future, one workflow at a time.</p>
       </div>
       <div class="footer-links">
         <a href="https://github.com/alforcen2" target="_blank" rel="noopener">
@@ -853,7 +877,7 @@
         </a>
       </div>
     </div>
-    <p class="footer-copy">© 2025 ForcenAI. All rights reserved. Built with Claude.</p>
+    <p class="footer-copy" data-i18n="footer_copy">© 2026 ForcenAI. All rights reserved. Built with Claude.</p>
   </div>
 </footer>
 
@@ -992,6 +1016,193 @@
       }, 900);
     });
   })();
+
+  // ── Multi-language ──
+  const translations = {
+    es: {
+      page_title: "ForcenAI — Consultoría de Agentes de IA impulsada por Claude",
+      meta_description: "ForcenAI se especializa en automatización basada en Claude: agentes personalizados, sistemas de despacho multi-agente e integraciones MCP.",
+      nav_services: "Servicios",
+      nav_process: "Proceso",
+      nav_about: "Sobre mí",
+      nav_contact: "Contacto",
+      nav_cta: "Comenzar Proyecto",
+      lang_es: "🇪🇸 ES",
+      lang_en: "🇬🇧 EN",
+      hero_badge: "Consultoría de IA impulsada por Claude",
+      hero_title: "Construimos Agentes de IA que Trabajan<br/><span>Mientras Duermes</span>",
+      hero_sub: "ForcenAI se especializa en automatización basada en Claude: agentes personalizados, sistemas de despacho multi-agente e integraciones MCP para empresas que quieren avanzar más rápido.",
+      hero_cta_primary: "Ver Servicios",
+      hero_cta_secondary: "Ver Casos Prácticos",
+      services_label: "Qué Hacemos",
+      services_title: "Servicios Diseñados para la<br/>IA Agéntica",
+      services_sub: "Desde una única automatización hasta pipelines multi-agente a escala empresarial — entregamos integraciones de Claude listas para producción.",
+      service1_title: "Creación de Agentes de IA",
+      service1_desc: "Agentes personalizados impulsados por Claude que manejan flujos de trabajo complejos de forma autónoma. Desde bots específicos hasta sistemas agénticos completos.",
+      service2_title: "Arquitectura de Despacho",
+      service2_desc: "Sistemas de orquestación multi-agente que enrutan tareas de forma inteligente entre agentes especializados, como el propio Dispatch de Claude.",
+      service3_title: "Integración de Claude",
+      service3_desc: "Integra Claude en tus productos, APIs y herramientas internas actuales. Despliegue rápido y listo para producción desde el primer día.",
+      service4_title: "Desarrollo de MCP",
+      service4_desc: "Servidores personalizados del Protocolo de Contexto de Modelo que dan a tus agentes acceso a cualquier sistema, base de datos o API que ya utilices.",
+      service5_title: "Consultoría de Estrategia de IA",
+      service5_desc: "Hojas de ruta y marcos para identificar dónde los agentes de IA ofrecen el mayor retorno de inversión en los procesos de tu organización.",
+      service6_title: "Formación y Capacitación",
+      service6_desc: "Mejora las habilidades de tu equipo para trabajar junto con agentes de IA de manera efectiva. Talleres, guías y soporte continuo para mantener el ritmo.",
+      why_label: "Nuestra Base",
+      why_title: "Por qué construimos sobre Claude",
+      why_sub: "No todos los modelos son iguales para el trabajo agéntico. Elegimos Claude por todas las razones que importan.",
+      why_card1_title: "Más Seguro y Capaz",
+      why_card1_desc: "Claude lidera consistentemente los estándares de seguridad sin sacrificar el rendimiento. Razona con cuidado y se mantiene enfocado en la tarea.",
+      why_card2_title: "El Mejor para Agentes",
+      why_card2_desc: "La amplia ventana de contexto de Claude, su precisión con herramientas y el seguimiento de instrucciones lo hacen ideal para tareas agénticas autónomas.",
+      why_card3_title: "Listo para Empresas",
+      why_card3_desc: "El nivel empresarial de Anthropic ofrece el control, cumplimiento y las garantías que las organizaciones serias necesitan antes de desplegar a gran escala.",
+      process_label: "Cómo Trabajamos",
+      process_title: "De la Idea al Agente Desplegado",
+      process_sub: "Un proceso claro y colaborativo diseñado para la velocidad sin comprometer la calidad.",
+      step1_title: "Descubrimiento",
+      step1_desc: "Mapeamos tus flujos de trabajo, identificamos oportunidades de automatización y definimos el alcance con métricas de éxito claras.",
+      step2_title: "Arquitectura",
+      step2_desc: "Diseñamos el sistema de agentes: herramientas, prompts, estrategia de memoria y puntos de integración, antes de programar.",
+      step3_title: "Construcción y Pruebas",
+      step3_desc: "Desarrollo iterativo con bucles continuos de evaluación. Cada agente es probado ante casos límite antes de su entrega.",
+      step4_title: "Despliegue y Monitoreo",
+      step4_desc: "Lanzamos a producción, configuramos paneles de control y proporcionamos soporte continuo de optimización tras el lanzamiento.",
+      about_label: "Sobre mí",
+      about_title: "Hola, soy <span style=\"color:var(--accent)\">Alfonso</span>",
+      about_text1: "Consultor de IA especializado en sistemas impulsados por Claude. He pasado años en la intersección de ingeniería de software e IA aplicada, y fundé ForcenAI para ayudar a las empresas a ir más allá de los chatbots hacia la verdadera automatización agéntica.",
+      about_text2: "Ya sea un agente de flujo de trabajo único o un sistema complejo multi-agente, cada proyecto cuenta con mi atención directa. <strong>Calidad sobre volumen.</strong>",
+      about_text3: "📍 <strong>Ubicado en Zaragoza, España.</strong> Trabajo con equipos a nivel global: remoto y asíncrono.",
+      stat1_label: "Agentes Desplegados",
+      stat2_label: "Impulsado por Claude",
+      stat3_label: "Alcance Global",
+      contact_label: "Contacto",
+      contact_title: "Construyamos algo <span style=\"color:var(--accent)\">juntos</span>",
+      contact_sub: "¿Tienes un flujo de trabajo que automatizar? ¿Un producto que integrar con Claude? ¿O quieres explorar qué es posible? Escríbeme y te responderé en menos de 24 horas.",
+      form_name: "Tu Nombre",
+      form_email: "Correo Electrónico",
+      form_message: "Mensaje",
+      form_submit: "Enviar Mensaje →",
+      form_success: "✓ ¡Mensaje recibido! Me pondré en contacto contigo en menos de 24 horas.",
+      footer_tagline: "Construyendo el futuro agéntico, un flujo de trabajo a la vez.",
+      footer_copy: "© 2026 ForcenAI. Todos los derechos reservados. Creado con Claude."
+    },
+    en: {
+      page_title: "ForcenAI — Claude-Powered AI Agent Consultancy",
+      meta_description: "ForcenAI specialises in Claude-powered automation — custom agents, multi-agent dispatch systems, and MCP integrations.",
+      nav_services: "Services",
+      nav_process: "Process",
+      nav_about: "About",
+      nav_contact: "Contact",
+      nav_cta: "Start a Project",
+      lang_es: "🇪🇸 ES",
+      lang_en: "🇬🇧 EN",
+      hero_badge: "Claude-Powered AI Consultancy",
+      hero_title: "We Build AI Agents That Work<br/><span>While You Sleep</span>",
+      hero_sub: "ForcenAI specialises in Claude-powered automation — custom agents, multi-agent dispatch systems, and MCP integrations for businesses that want to move faster.",
+      hero_cta_primary: "See Our Services",
+      hero_cta_secondary: "View Case Studies",
+      services_label: "What We Do",
+      services_title: "Services Built Around<br/>Agentic AI",
+      services_sub: "From a single automation to enterprise-scale multi-agent pipelines — we deliver production-ready Claude integrations.",
+      service1_title: "AI Agent Creation",
+      service1_desc: "Custom Claude-powered agents that handle complex workflows autonomously. From single-purpose bots to full agentic systems.",
+      service2_title: "Dispatch Architecture",
+      service2_desc: "Multi-agent orchestration systems that route tasks intelligently across specialised agents — just like Claude's own Dispatch.",
+      service3_title: "Claude Integration",
+      service3_desc: "Embed Claude into your existing products, APIs, and internal tools. Fast deployment, production-ready from day one.",
+      service4_title: "MCP Development",
+      service4_desc: "Custom Model Context Protocol servers that give your agents access to any system, database, or API you already use.",
+      service5_title: "AI Strategy Consulting",
+      service5_desc: "Roadmaps and frameworks to identify where AI agents deliver the most ROI in your organisation's workflows.",
+      service6_title: "Training & Enablement",
+      service6_desc: "Upskill your team to work alongside AI agents effectively. Workshops, playbooks, and ongoing support to keep pace.",
+      why_label: "Our Foundation",
+      why_title: "Why We Build on Claude",
+      why_sub: "Not all models are equal when it comes to agentic work. We chose Claude for every reason that matters.",
+      why_card1_title: "Safest & Most Capable",
+      why_card1_desc: "Claude consistently leads safety benchmarks without sacrificing performance. It reasons carefully, refuses appropriately, and stays on task.",
+      why_card2_title: "Best for Agents",
+      why_card2_desc: "Claude's long context window, tool use fidelity, and instruction-following make it uniquely suited to autonomous, multi-step agentic tasks.",
+      why_card3_title: "Enterprise-Ready",
+      why_card3_desc: "Anthropic's enterprise tier offers the controls, compliance guarantees, and SLAs that serious organisations need before deploying at scale.",
+      process_label: "How We Work",
+      process_title: "From Idea to Deployed Agent",
+      process_sub: "A clear, collaborative process built for speed without cutting corners.",
+      step1_title: "Discover",
+      step1_desc: "We map your workflows, identify automation opportunities, and define scope with clear success metrics.",
+      step2_title: "Architect",
+      step2_desc: "We design the agent system — tools, prompts, memory strategy, and integration points — before writing a line of code.",
+      step3_title: "Build & Test",
+      step3_desc: "Iterative development with continuous eval loops. Every agent is stress-tested on edge cases before handoff.",
+      step4_title: "Deploy & Monitor",
+      step4_desc: "We ship to production, set up observability dashboards, and provide ongoing optimisation support post-launch.",
+      about_label: "About",
+      about_title: "Hola, I'm <span style=\"color:var(--accent)\">Alfonso</span>",
+      about_text1: "I'm the founder of ForcenAI — an AI agent consultancy focused exclusively on Claude-powered systems. I've spent years working at the intersection of software engineering and applied AI, and I started ForcenAI to help businesses move beyond chatbots into real agentic automation.",
+      about_text2: "Whether it's a single workflow agent or a complex multi-agent dispatch system, every project gets my direct attention. <strong>Quality over volume.</strong>",
+      about_text3: "📍 <strong>Based in Zaragoza, Spain.</strong> Working with teams globally — remote-first, async-friendly.",
+      stat1_label: "Agents Deployed",
+      stat2_label: "Claude-Powered",
+      stat3_label: "Client Reach",
+      contact_label: "Get in Touch",
+      contact_title: "Let's Build Something<br/><span style=\"color:var(--accent)\">Together</span>",
+      contact_sub: "Have a workflow that needs automating? A product that needs Claude embedded? Or just want to explore what's possible? Drop a message and I'll get back to you within 24 hours.",
+      form_name: "Your Name",
+      form_email: "Email Address",
+      form_message: "Message",
+      form_submit: "Send Message →",
+      form_success: "✓ Message received! I'll be in touch within 24 hours.",
+      footer_tagline: "Building the agentic future, one workflow at a time.",
+      footer_copy: "© 2026 ForcenAI. All rights reserved. Built with Claude."
+    }
+  };
+
+  function setLanguage(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+
+    // Update Page Title and Meta Description
+    if (translations[lang].page_title) document.title = translations[lang].page_title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && translations[lang].meta_description) {
+      metaDesc.setAttribute('content', translations[lang].meta_description);
+    }
+
+    // Update form placeholders
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+
+    if (lang === 'es') {
+      if (nameInput) nameInput.placeholder = "Tu Nombre Completo";
+      if (emailInput) emailInput.placeholder = "correo@ejemplo.com";
+      if (messageInput) messageInput.placeholder = "Cuéntame sobre tu proyecto o flujo de trabajo...";
+    } else {
+      if (nameInput) nameInput.placeholder = "Ada Lovelace";
+      if (emailInput) emailInput.placeholder = "ada@example.com";
+      if (messageInput) messageInput.placeholder = "Tell me about your project or workflow...";
+    }
+
+    // Update active states in all toggles
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.classList.toggle('active', btn.id.includes(lang));
+    });
+
+    localStorage.setItem('preferredLang', lang);
+    document.documentElement.lang = lang;
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('preferredLang') || 'es';
+    setLanguage(savedLang);
+  });
 </script>
 </body>
 </html>
