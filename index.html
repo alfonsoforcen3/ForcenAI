@@ -65,13 +65,28 @@
     /* ════════════════════════════
        NAV
     ════════════════════════════ */
+    /* ── Slim Top Bar ── */
+    .slim-contact-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+      height: 32px; font-size: 11px; font-weight: 500;
+      background: var(--card1); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: flex-end;
+      padding: 0 24px; gap: 20px;
+    }
+    .slim-contact-bar a {
+      color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .slim-contact-bar a:hover { color: var(--accent); }
+    .slim-contact-bar svg { width: 14px; height: 14px; fill: currentColor; }
+
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 32px; left: 0; right: 0; z-index: 100;
       padding: 18px 0;
       background: rgba(10,10,10,0.85);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      transition: background 0.3s;
+      transition: background 0.3s, top 0.3s;
     }
     nav .inner {
       display: flex; align-items: center; justify-content: space-between;
@@ -106,6 +121,17 @@
       border: 1px solid rgba(250,249,247,0.2);
     }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05); color: var(--text); border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
+    
+    .btn-whatsapp { 
+      background: #25D366 !important; color: #fff !important; 
+    }
+    .btn-whatsapp:hover { background: #20BA5A !important; transform: translateY(-2px); }
+
     .nav-cta { display: block; }
 
     /* hamburger */
@@ -128,6 +154,8 @@
       text-decoration: none; transition: color 0.2s;
     }
     .mobile-menu a:hover { color: var(--accent); }
+    .mobile-contact-group { display: flex; gap: 10px; margin-top: 20px; width: calc(100% - 48px); max-width: 400px; }
+    .mobile-contact-group .btn { margin-top: 0; flex: 1; }
     .mobile-close {
       position: absolute; top: 24px; right: 24px;
       background: none; border: none; color: var(--muted);
@@ -343,7 +371,7 @@
     }
     .contact-info h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 700; margin-bottom: 16px; }
     .contact-info p { color: var(--muted); line-height: 1.75; margin-bottom: 28px; font-size: 16px; }
-    .contact-email {
+    .contact-email, .contact-whatsapp {
       display: inline-flex; align-items: center; gap: 10px;
       color: var(--accent); text-decoration: none;
       font-size: 15px; font-weight: 500;
@@ -351,10 +379,16 @@
       background: rgba(218,119,86,0.08);
       border: 1px solid var(--border);
       border-radius: 8px;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
-    .contact-email:hover { background: rgba(218,119,86,0.16); border-color: var(--accent); }
-    .contact-email svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-email:hover, .contact-whatsapp:hover { 
+      background: rgba(218,119,86,0.16); 
+      border-color: var(--accent); 
+      transform: translateY(-2px);
+    }
+    .contact-email svg, .contact-whatsapp svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-whatsapp svg { fill: var(--accent); stroke: none; }
+    .contact-methods { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 
     form { display: flex; flex-direction: column; gap: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -476,6 +510,18 @@
 </head>
 <body>
 
+<!-- ═══ SLIM CONTACT BAR ═══ -->
+<div class="slim-contact-bar">
+  <a href="mailto:alforcen2@gmail.com">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    Email
+  </a>
+  <a href="https://wa.me/34658207812" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+</div>
+
 <!-- ═══ NAV ═══ -->
 <nav id="navbar">
   <div class="inner">
@@ -524,6 +570,10 @@
   <a href="#about" class="mobile-link" data-i18n="nav_about">Sobre mí</a>
   <a href="#contact" class="mobile-link" data-i18n="nav_contact">Contacto</a>
   <a href="#contact" class="btn btn-primary" style="margin-top:8px" data-i18n="nav_cta">Comenzar Proyecto</a>
+  <div class="mobile-contact-group">
+    <a href="mailto:alforcen2@gmail.com" class="btn btn-secondary">Email</a>
+    <a href="https://wa.me/34658207812" target="_blank" class="btn btn-whatsapp">WhatsApp</a>
+  </div>
   <div class="lang-toggle" style="margin-top:24px; margin-right:0;">
     <button onclick="setLanguage('es')" id="btn-es-mob" class="active">🇪🇸 ES</button>
     <button onclick="setLanguage('en')" id="btn-en-mob">🇬🇧 EN</button>
@@ -817,16 +867,26 @@
         <p class="section-label" data-i18n="contact_label">Get in Touch</p>
         <h2 data-i18n="contact_title">Let's Build Something<br/><span style="color:var(--accent)">Together</span></h2>
         <p data-i18n="contact_sub">Have a workflow that needs automating? A product that needs Claude embedded? Or just want to explore what's possible? Drop a message and I'll get back to you within 24 hours.</p>
-        <a href="mailto:alforcen2@gmail.com" class="contact-email">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          alforcen2@gmail.com
-        </a>
+        <div class="contact-methods">
+          <a href="mailto:alforcen2@gmail.com" class="contact-email">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            alforcen2@gmail.com
+          </a>
+          <a href="https://wa.me/34658207812" target="_blank" class="contact-whatsapp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            +34 658 207 812
+          </a>
+        </div>
       </div>
       <div class="fade-up delay-2">
-        <form id="contactForm" novalidate>
+        <form id="contactForm" action="https://formspree.io/f/alforcen2@gmail.com" method="POST" novalidate>
           <div class="form-group">
             <label for="name" data-i18n="form_name">Your Name</label>
             <input type="text" id="name" name="name" placeholder="Ada Lovelace" required />
+          </div>
+          <div class="form-group">
+            <label for="company" data-i18n="form_company">Company (Optional)</label>
+            <input type="text" id="company" name="company" placeholder="Your Company" />
           </div>
           <div class="form-group">
             <label for="email" data-i18n="form_email">Email Address</label>
@@ -834,7 +894,7 @@
           </div>
           <div class="form-group">
             <label for="message" data-i18n="form_message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell me about your project or workflow..." required></textarea>
+            <textarea id="message" name="message" required data-i18n="form_message_default">Hello Alfonso, I'd like to talk about how ForcenAI can help me with...</textarea>
           </div>
           <button type="submit" class="btn-submit" data-i18n="form_submit">Send Message →</button>
           <div class="form-success" id="formSuccess" data-i18n="form_success">
@@ -1081,8 +1141,10 @@
       contact_title: "Construyamos algo <span style=\"color:var(--accent)\">juntos</span>",
       contact_sub: "¿Tienes un flujo de trabajo que automatizar? ¿Un producto que integrar con Claude? ¿O quieres explorar qué es posible? Escríbeme y te responderé en menos de 24 horas.",
       form_name: "Tu Nombre",
+      form_company: "Empresa (Opcional)",
       form_email: "Correo Electrónico",
       form_message: "Mensaje",
+      form_message_default: "Hola Alfonso, me gustaría hablar sobre cómo ForcenAI puede ayudarme con...",
       form_submit: "Enviar Mensaje →",
       form_success: "✓ ¡Mensaje recibido! Me pondré en contacto contigo en menos de 24 horas.",
       footer_tagline: "Construyendo el futuro agéntico, un flujo de trabajo a la vez.",
@@ -1150,8 +1212,10 @@
       contact_title: "Let's Build Something<br/><span style=\"color:var(--accent)\">Together</span>",
       contact_sub: "Have a workflow that needs automating? A product that needs Claude embedded? Or just want to explore what's possible? Drop a message and I'll get back to you within 24 hours.",
       form_name: "Your Name",
+      form_company: "Company (Optional)",
       form_email: "Email Address",
       form_message: "Message",
+      form_message_default: "Hello Alfonso, I'd like to talk about how ForcenAI can help me with...",
       form_submit: "Send Message →",
       form_success: "✓ Message received! I'll be in touch within 24 hours.",
       footer_tagline: "Building the agentic future, one workflow at a time.",
@@ -1176,17 +1240,35 @@
 
     // Update form placeholders
     const nameInput = document.getElementById('name');
+    const companyInput = document.getElementById('company');
     const emailInput = document.getElementById('email');
     const messageInput = document.getElementById('message');
 
     if (lang === 'es') {
       if (nameInput) nameInput.placeholder = "Tu Nombre Completo";
+      if (companyInput) companyInput.placeholder = "Tu Empresa";
       if (emailInput) emailInput.placeholder = "correo@ejemplo.com";
-      if (messageInput) messageInput.placeholder = "Cuéntame sobre tu proyecto o flujo de trabajo...";
+      if (messageInput) {
+        messageInput.placeholder = "Cuéntame sobre tu proyecto o flujo de trabajo...";
+        if (messageInput.value === translations['en'].form_message_default) {
+           messageInput.value = translations['es'].form_message_default;
+        }
+      }
     } else {
       if (nameInput) nameInput.placeholder = "Ada Lovelace";
+      if (companyInput) companyInput.placeholder = "Your Company";
       if (emailInput) emailInput.placeholder = "ada@example.com";
-      if (messageInput) messageInput.placeholder = "Tell me about your project or workflow...";
+      if (messageInput) {
+        messageInput.placeholder = "Tell me about your project or workflow...";
+        if (messageInput.value === translations['es'].form_message_default) {
+           messageInput.value = translations['en'].form_message_default;
+        }
+      }
+    }
+    
+    // Also update hardcoded default message if user hasn't touched it
+    if (messageInput && !messageInput.value) {
+       messageInput.value = translations[lang].form_message_default;
     }
 
     // Update active states in all toggles
