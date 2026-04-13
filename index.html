@@ -1,37 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ForcenAI — Claude-Powered AI Agent Consultancy</title>
-  <meta name="description" content="ForcenAI specialises in Claude-powered automation — custom agents, multi-agent dispatch systems, and MCP integrations." />
+  <meta name="description" content="ForcenAI — Executive AI Agent Consultancy. Expertise from Apple & Samsung global HQ to scale your business with Claude-powered automation." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:       #0A0A0A;
-      --card1:    #141414;
-      --card2:    #1A1A1A;
-      --accent:   #DA7756;
-      --accent2:  #E8825A;
-      --text:     #FAF9F7;
-      --muted:    #9A9A8A;
-      --border:   rgba(218,119,86,0.2);
-      --radius:   12px;
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --accent: #DA7756;
+      --accent-glow: rgba(218,119,86,0.3);
+      --text: #FAF9F7;
+      --muted: #A1A1AA;
+      --border: rgba(255,255,255,0.08);
+      --glass: rgba(20,20,20,0.7);
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
+      font-family: 'Inter', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
+
+    h1, h2, h3, h4, .section-label, .nav-logo { font-family: 'Space Grotesk', sans-serif; }
 
     /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 6px; }
@@ -39,1271 +39,492 @@
     ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
 
     /* ── Utility ── */
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-    .section { padding: 100px 0; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 140px 0; position: relative; }
     .section-label {
-      font-size: 12px; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+      display: block;
     }
-    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.2; }
-    .section-sub { color: var(--muted); margin-top: 14px; font-size: 17px; max-width: 560px; }
+    .section-title { font-size: clamp(40px, 6vw, 64px); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
+    .section-sub { color: var(--muted); margin-top: 24px; font-size: 20px; max-width: 700px; }
 
     /* ── Fade-in animations ── */
     .fade-up {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(40px);
+      transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .delay-1 { transition-delay: 0.1s; }
     .delay-2 { transition-delay: 0.2s; }
     .delay-3 { transition-delay: 0.3s; }
     .delay-4 { transition-delay: 0.4s; }
-    .delay-5 { transition-delay: 0.5s; }
-    .delay-6 { transition-delay: 0.6s; }
 
-    /* ════════════════════════════
-       NAV
-    ════════════════════════════ */
-    /* ── Slim Top Bar ── */
-    .slim-contact-bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
-      height: 32px; font-size: 11px; font-weight: 500;
-      background: var(--card1); border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: flex-end;
-      padding: 0 24px; gap: 20px;
+    /* ── Nav ── */
+    #navbar {
+      position: fixed; top: 0; left: 0; width: 100%; height: 90px;
+      z-index: 1000; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      background: transparent; border-bottom: 1px solid transparent;
     }
-    .slim-contact-bar a {
-      color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px;
-      transition: color 0.2s;
+    #navbar.scrolled {
+      background: rgba(10,10,10,0.8); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); height: 80px;
     }
-    .slim-contact-bar a:hover { color: var(--accent); }
-    .slim-contact-bar svg { width: 14px; height: 14px; fill: currentColor; }
+    #navbar .inner {
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 12px; }
+    .nav-logo svg { height: 32px; width: 32px; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 15px; font-weight: 500; transition: all 0.2s; position: relative; }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--accent); transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
 
-    nav {
-      position: fixed; top: 32px; left: 0; right: 0; z-index: 100;
-      padding: 18px 0;
-      background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.3s, top 0.3s;
-    }
-    nav .inner {
-      display: flex; align-items: center; justify-content: space-between;
-      max-width: 1140px; margin: 0 auto; padding: 0 24px;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 20px; font-weight: 700; color: var(--text);
-      text-decoration: none;
-    }
-    .nav-logo svg { flex-shrink: 0; }
-    .nav-links {
-      display: flex; align-items: center; gap: 36px; list-style: none;
-    }
-    .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
+    /* ── Buttons ── */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      padding: 10px 22px; border-radius: 8px;
-      font-size: 14px; font-weight: 600; text-decoration: none;
-      cursor: pointer; transition: all 0.2s; border: none;
+      padding: 16px 32px; border-radius: 14px; font-size: 16px; font-weight: 600;
+      text-decoration: none; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer; border: none; font-family: 'Space Grotesk', sans-serif;
     }
-    .btn-primary {
-      background: var(--accent); color: #fff;
-    }
-    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(218,119,86,0.35); }
-    .btn-ghost {
-      background: transparent; color: var(--text);
-      border: 1px solid rgba(250,249,247,0.2);
-    }
-    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-    
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05); color: var(--text); border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
-    
-    .btn-whatsapp { 
-      background: #25D366 !important; color: #fff !important; 
-    }
-    .btn-linkedin { 
-      background: #0077B5 !important; color: #fff !important; 
-    }
-    .btn-linkedin:hover { background: #006097 !important; transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 10px 30px rgba(218,119,86,0.25); }
+    .btn-primary:hover { background: #e8825a; transform: translateY(-3px); box-shadow: 0 20px 40px rgba(218,119,86,0.4); }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: #fff; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); transform: translateY(-3px); }
 
-    .nav-cta { display: block; }
-
-    /* hamburger */
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px; cursor: pointer;
-      background: none; border: none; padding: 4px;
-    }
-    .hamburger span {
-      display: block; width: 24px; height: 2px;
-      background: var(--text); border-radius: 2px; transition: all 0.3s;
-    }
-    .mobile-menu {
-      display: none; position: fixed; inset: 0; z-index: 99;
-      background: rgba(10,10,10,0.97); backdrop-filter: blur(16px);
-      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-size: 22px; font-weight: 600; color: var(--text);
-      text-decoration: none; transition: color 0.2s;
-    }
-    .mobile-menu a:hover { color: var(--accent); }
-    .mobile-contact-group { display: flex; gap: 8px; margin-top: 20px; width: calc(100% - 48px); max-width: 440px; }
-    .mobile-contact-group .btn { margin-top: 0; flex: 1; padding: 10px 8px; font-size: 13px; }
-    .mobile-close {
-      position: absolute; top: 24px; right: 24px;
-      background: none; border: none; color: var(--muted);
-      font-size: 28px; cursor: pointer; line-height: 1;
-    }
-
-    /* ════════════════════════════
-       HERO
-    ════════════════════════════ */
-    #hero {
-      min-height: 100vh;
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
-      padding-top: 80px;
-    }
+    /* ── Hero ── */
+    #hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 0; overflow: hidden; }
     .hero-bg {
-      position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(218,119,86,0.12) 0%, transparent 70%);
-      animation: glow-pulse 6s ease-in-out infinite;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 80% 20%, var(--accent-glow) 0%, transparent 40%),
+                  radial-gradient(circle at 20% 80%, rgba(60,60,80,0.15) 0%, transparent 40%);
+      pointer-events: none; z-index: -1;
     }
-    @keyframes glow-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.6; transform: scale(1.08); }
-    }
-
-    /* Particle canvas */
-    #particle-canvas {
-      position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
-    }
-
-    .hero-inner {
-      position: relative; z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center;
-      padding: 60px 0;
-    }
-    .hero-content {}
+    #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.5; }
+    .hero-inner { position: relative; z-index: 10; max-width: 950px; }
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(218,119,86,0.12); border: 1px solid var(--border);
-      border-radius: 100px; padding: 6px 16px;
-      font-size: 13px; font-weight: 500; color: var(--accent);
-      margin-bottom: 28px;
-    }
-    .hero-badge-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent);
-      animation: dot-pulse 2s ease-in-out infinite;
-    }
-    @keyframes dot-pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.3; }
-    }
-    .hero-h1 {
-      font-size: clamp(32px, 5vw, 58px);
-      font-weight: 700; line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
-    }
-    .hero-h1 span { color: var(--accent); }
-    .hero-sub {
-      font-size: 18px; color: var(--muted); line-height: 1.7;
-      max-width: 500px; margin-bottom: 36px;
-    }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-
-    /* Alien mascot */
-    .hero-visual {
-      display: flex; justify-content: center; align-items: center;
-    }
-    .alien-wrapper {
-      animation: float 4s ease-in-out infinite;
-      filter: drop-shadow(0 0 40px rgba(218,119,86,0.3));
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-18px); }
-    }
-
-    /* ════════════════════════════
-       SERVICES
-    ════════════════════════════ */
-    #services { background: var(--bg); }
-    .services-header { margin-bottom: 56px; }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .service-card {
-      background: var(--card1);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-      cursor: default;
-    }
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(218,119,86,0.15);
-      border-color: rgba(218,119,86,0.5);
-    }
-    .service-icon {
-      width: 48px; height: 48px;
-      background: rgba(218,119,86,0.12);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px;
-    }
-    .service-icon svg { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .service-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
-    .service-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
-
-    /* ════════════════════════════
-       WHY CLAUDE
-    ════════════════════════════ */
-    #why {
-      background: var(--card1);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .why-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px; margin-top: 52px;
-    }
-    .why-card {
-      background: var(--card2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .why-card:hover { border-color: rgba(218,119,86,0.5); transform: translateY(-4px); }
-    .why-icon {
-      width: 44px; height: 44px;
-      background: rgba(218,119,86,0.1);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 18px;
-    }
-    .why-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .why-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
-    .why-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
-
-    /* ════════════════════════════
-       PROCESS
-    ════════════════════════════ */
-    #process { background: var(--bg); }
-    .process-header { margin-bottom: 64px; }
-    .process-steps {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 0; position: relative;
-    }
-    .process-steps::before {
-      content: '';
-      position: absolute; top: 28px; left: calc(12.5%);
-      width: 75%; height: 2px;
-      background: linear-gradient(90deg, var(--accent) 0%, rgba(218,119,86,0.2) 100%);
-    }
-    .process-step { text-align: center; padding: 0 16px; position: relative; }
-    .step-num {
-      width: 56px; height: 56px; border-radius: 50%;
-      background: var(--accent); color: #fff;
-      font-size: 20px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      position: relative; z-index: 1;
-      box-shadow: 0 0 0 6px rgba(218,119,86,0.15);
-    }
-    .step-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-    .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
-    /* ════════════════════════════
-       ABOUT
-    ════════════════════════════ */
-    #about { background: var(--card1); border-top: 1px solid var(--border); }
-    .about-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center;
-    }
-    .about-avatar {
-      display: flex; justify-content: center;
-    }
-    .avatar-ring {
-      width: 220px; height: 220px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(218,119,86,0.25) 0%, rgba(10,10,10,0) 70%);
-      border: 2px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      animation: avatar-glow 3s ease-in-out infinite;
-    }
-    @keyframes avatar-glow {
-      0%, 100% { box-shadow: 0 0 30px rgba(218,119,86,0.15); }
-      50%       { box-shadow: 0 0 60px rgba(218,119,86,0.3); }
-    }
-    .about-text h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 700; margin-bottom: 16px; }
-    .about-text p { color: var(--muted); line-height: 1.75; margin-bottom: 14px; font-size: 16px; }
-    .about-text strong { color: var(--text); }
-    .about-stats {
-      display: flex; gap: 32px; margin-top: 28px;
-    }
-    .stat { }
-    .stat-num { font-size: 28px; font-weight: 700; color: var(--accent); }
-    .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
-
-    /* ════════════════════════════
-       CONTACT
-    ════════════════════════════ */
-    #contact { background: var(--bg); }
-    .contact-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: start;
-    }
-    .contact-info h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 700; margin-bottom: 16px; }
-    .contact-info p { color: var(--muted); line-height: 1.75; margin-bottom: 28px; font-size: 16px; }
-    .contact-email, .contact-whatsapp, .contact-linkedin {
       display: inline-flex; align-items: center; gap: 10px;
-      color: var(--accent); text-decoration: none;
-      font-size: 15px; font-weight: 500;
-      padding: 12px 20px;
-      background: rgba(218,119,86,0.08);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      padding: 10px 20px; border-radius: 100px; font-size: 14px; font-weight: 500; color: var(--accent);
+      margin-bottom: 36px; backdrop-filter: blur(10px);
     }
-    .contact-email:hover, .contact-whatsapp:hover, .contact-linkedin:hover { 
-      background: rgba(218,119,86,0.16); 
-      border-color: var(--accent); 
-      transform: translateY(-2px);
-    }
-    .contact-email svg, .contact-whatsapp svg, .contact-linkedin svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .contact-whatsapp svg, .contact-linkedin svg { fill: var(--accent); stroke: none; }
-    .contact-methods { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .hero-badge-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 12px var(--accent); }
+    .hero-h1 { font-size: clamp(52px, 9vw, 96px); line-height: 1.0; font-weight: 700; letter-spacing: -0.05em; margin-bottom: 32px; }
+    .hero-h1 span { background: linear-gradient(135deg, #DA7756 0%, #f7c5b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub { font-size: clamp(20px, 2.2vw, 24px); color: var(--muted); margin-bottom: 48px; line-height: 1.5; max-width: 720px; font-weight: 400; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 20px; }
 
-    form { display: flex; flex-direction: column; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    label { font-size: 13px; font-weight: 500; color: var(--muted); }
-    input, textarea {
-      background: var(--card1);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      resize: vertical;
-    }
-    input::placeholder, textarea::placeholder { color: var(--muted); }
-    input:focus, textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(218,119,86,0.15);
-    }
-    textarea { min-height: 130px; }
-    .btn-submit {
-      background: var(--accent); color: #fff;
-      border: none; border-radius: 8px;
-      padding: 14px 28px; font-size: 15px; font-weight: 600;
-      cursor: pointer; font-family: 'Inter', sans-serif;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      align-self: flex-start;
-    }
-    .btn-submit:hover {
-      background: var(--accent2);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(218,119,86,0.35);
-    }
-    .form-success {
-      display: none; background: rgba(218,119,86,0.1);
-      border: 1px solid var(--border); border-radius: 8px;
-      padding: 16px 20px; color: var(--accent);
-      font-size: 14px; font-weight: 500; text-align: center;
-    }
+    /* ── Experience Wall ── */
+    .experience-wall { padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.01); }
+    .exp-inner { display: flex; align-items: center; justify-content: center; gap: 80px; flex-wrap: wrap; filter: grayscale(1); opacity: 0.4; transition: all 0.5s; }
+    .exp-inner:hover { filter: grayscale(0); opacity: 0.8; }
+    .exp-logo { display: flex; align-items: center; gap: 14px; color: #fff; font-size: 20px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+    .exp-logo svg { height: 32px; fill: currentColor; }
 
-    /* ════════════════════════════
-       FOOTER
-    ════════════════════════════ */
-    footer {
-      background: var(--card1);
-      border-top: 1px solid var(--border);
-      padding: 48px 0 32px;
+    /* ── Integrations Carousel ── */
+    .carousel-section { padding: 120px 0; background: #080808; overflow: hidden; position: relative; }
+    .carousel-track-container { position: relative; width: 100%; display: flex; align-items: center; padding: 40px 0; }
+    .carousel-track { display: flex; width: max-content; gap: 24px; animation: scroll-infinite 40s linear infinite; }
+    .carousel-track:hover { animation-play-state: paused; }
+    @keyframes scroll-infinite { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .integration-card {
+      width: 200px; height: 120px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px); flex-shrink: 0;
     }
-    .footer-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 24px;
-    }
-    .footer-brand { }
-    .footer-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 18px; font-weight: 700;
-      text-decoration: none; color: var(--text);
-      margin-bottom: 6px;
-    }
-    .footer-tagline { font-size: 13px; color: var(--muted); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a {
-      color: var(--muted); text-decoration: none; font-size: 14px;
-      transition: color 0.2s; display: flex; align-items: center; gap: 6px;
-    }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-links svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .footer-copy {
-      width: 100%; text-align: center;
-      font-size: 12px; color: rgba(154,154,138,0.5);
-      margin-top: 32px; padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
+    .integration-card:hover { border-color: var(--accent); transform: scale(1.08) translateY(-5px); background: rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .integration-card svg { height: 36px; width: 36px; fill: var(--accent); }
+    .integration-card span { font-size: 14px; font-weight: 600; color: var(--muted); }
+    .integration-card.others { border-style: dashed; }
+    .integration-card.others span { color: var(--accent); }
 
-    /* ════════════════════════════
-       RESPONSIVE
-    ════════════════════════════ */
-    /* lang toggle */
-    .lang-toggle {
-      display: flex; align-items: center; gap: 4px; margin-right: 16px;
-      padding: 4px; background: rgba(250,249,247,0.03); border-radius: 6px;
-      border: 1px solid rgba(250,249,247,0.05);
+    /* ── Services Grid Re-layout ── */
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
+    .service-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 40px 32px; border-radius: 24px;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); position: relative; overflow: hidden;
     }
-    .lang-toggle button {
-      background: none; border: none; color: var(--muted); cursor: pointer;
-      padding: 4px 10px; font-size: 12px; font-weight: 700; border-radius: 4px;
-      transition: all 0.2s; font-family: 'Inter', sans-serif;
+    .service-card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 30px var(--accent-glow); }
+    .service-icon { width: 56px; height: 56px; background: var(--accent-glow); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 28px; color: var(--accent); }
+    .service-icon svg { width: 28px; height: 28px; stroke-width: 2; }
+    .service-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
+    .service-card p { color: var(--muted); font-size: 16px; line-height: 1.6; }
+
+    /* ── Why Claude ── */
+    #why { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.01); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px; }
+    .why-card { background: var(--surface); border: 1px solid var(--border); padding: 40px; border-radius: 24px; transition: all 0.3s; }
+    .why-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+    .why-icon { width: 44px; height: 44px; color: var(--accent); margin-bottom: 24px; }
+    .why-icon svg { width: 100%; height: 100%; }
+
+    /* ── Process ── */
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 70px; }
+    .process-step { position: relative; text-align: center; }
+    .step-num { 
+      font-size: 80px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; 
+      line-height: 1; color: rgba(218,119,86,0.1); margin-bottom: -30px; 
     }
+    .step-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; position: relative; z-index: 1; }
+    .step-desc { font-size: 15px; color: var(--muted); line-height: 1.65; position: relative; z-index: 1; }
+
+    /* ── About Enhanced ── */
+    #about { background: #080808; }
+    .about-inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 100px; align-items: center; }
+    .about-avatar { position: relative; }
+    .avatar-bg { position: absolute; inset: -40px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); z-index: 0; }
+    .avatar-frame { position: relative; z-index: 1; width: 100%; border: 1px solid var(--border); border-radius: 32px; overflow: hidden; background: var(--surface); padding: 40px; display: flex; justify-content: center; }
+    .about-stats { display: flex; gap: 48px; margin-top: 50px; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+    /* ── Contact ── */
+    .contact-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; }
+    .contact-methods { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
+    .contact-method {
+      display: flex; align-items: center; gap: 20px; padding: 24px; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--surface); transition: all 0.3s;
+      text-decoration: none; color: inherit;
+    }
+    .contact-method:hover { border-color: var(--accent); background: rgba(255,255,255,0.03); transform: translateX(10px); }
+    .contact-method-icon { width: 48px; height: 48px; background: rgba(218,119,86,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent); }
+    .contact-method-text h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .contact-method-text p { font-size: 14px; color: var(--muted); }
+
+    /* ── Language Toggle & Mobile ── */
+    .lang-toggle { display: flex; gap: 4px; background: rgba(255,255,255,0.03); padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
+    .lang-toggle button { background: transparent; border: none; color: var(--muted); font-weight: 700; padding: 6px 12px; font-size: 12px; cursor: pointer; border-radius: 7px; transition: all 0.2s; }
     .lang-toggle button.active { background: var(--accent); color: #fff; }
-    .lang-toggle button:hover:not(.active) { color: var(--text); background: rgba(250,249,247,0.05); }
+    .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: transparent; border: none; padding: 5px; }
+    .hamburger span { display: block; width: 28px; height: 2px; background: #fff; border-radius: 2px; transition: 0.3s; }
+    .mobile-menu { position: fixed; inset: 0; z-index: 2000; background: #0A0A0A; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 32px; padding: 40px; }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a { font-size: 28px; font-weight: 700; color: #fff; text-decoration: none; font-family: 'Space Grotesk', sans-serif; }
+    .mobile-close { position: absolute; top: 30px; right: 40px; font-size: 40px; color: var(--muted); background: transparent; border: none; cursor: pointer; }
 
-    @media (max-width: 900px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
-      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-      .process-steps::before { display: none; }
-      .hero-inner { grid-template-columns: 1fr; text-align: center; }
-      .hero-sub { max-width: 100%; }
-      .hero-btns { justify-content: center; }
-      .hero-visual { order: -1; }
-      .about-inner { grid-template-columns: 1fr; text-align: center; }
-      .about-avatar { display: none; }
-      .about-stats { justify-content: center; }
-      .contact-inner { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 640px) {
-      .services-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .process-steps { grid-template-columns: 1fr; }
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-      .section { padding: 72px 0; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
-    }
+    @media (max-width: 1200px) { .services-grid { grid-template-columns: repeat(2, 1fr); } .why-grid { grid-template-columns: 1fr 1fr; } .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 60px; } .hero-inner { text-align: center; margin: 0 auto; } .hero-sub { margin-left: auto; margin-right: auto; } .hero-btns { justify-content: center; } }
+    @media (max-width: 768px) { .nav-links, .lang-toggle-desktop { display: none; } .hamburger { display: flex; } .section { padding: 100px 0; } .process-steps { grid-template-columns: 1fr; gap: 50px; } .services-grid { grid-template-columns: 1fr; } .exp-inner { gap: 40px; } .hero-h1 { font-size: 3.5rem; } }
   </style>
 </head>
 <body>
 
-<!-- ═══ SLIM CONTACT BAR ═══ -->
-<div class="slim-contact-bar">
-  <a href="mailto:alforcen2@gmail.com">
-    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    Email
-  </a>
-  <a href="https://wa.me/34658207812" target="_blank">
-    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    WhatsApp
-  </a>
-  <a href="https://www.linkedin.com/in/alfonsoforcen" target="_blank" data-i18n="nav_linkedin">
-    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-    LinkedIn
-  </a>
-</div>
-
-<!-- ═══ NAV ═══ -->
 <nav id="navbar">
-  <div class="inner">
+  <div class="container inner">
     <a href="#" class="nav-logo">
-      <!-- small alien inline SVG -->
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="14" cy="16" rx="9" ry="10" fill="#DA7756" opacity="0.15"/>
-        <ellipse cx="14" cy="15.5" rx="8.5" ry="9.5" stroke="#DA7756" stroke-width="1.5"/>
-        <!-- antenna -->
-        <line x1="14" y1="6" x2="14" y2="2" stroke="#DA7756" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="14" cy="1.5" r="1.5" fill="#DA7756"/>
-        <!-- eyes -->
-        <ellipse cx="10.5" cy="14" rx="2.5" ry="3" fill="#DA7756" opacity="0.9"/>
-        <ellipse cx="17.5" cy="14" rx="2.5" ry="3" fill="#DA7756" opacity="0.9"/>
-        <circle cx="11" cy="13.5" r="0.9" fill="#0A0A0A"/>
-        <circle cx="18" cy="13.5" r="0.9" fill="#0A0A0A"/>
-        <!-- mouth -->
-        <path d="M11 19.5 Q14 21.5 17 19.5" stroke="#DA7756" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <ellipse cx="16" cy="18" rx="10" ry="11" fill="#DA7756" opacity="0.15"/>
+        <ellipse cx="16" cy="17.5" rx="9.5" ry="10.5" stroke="#DA7756" stroke-width="2"/>
+        <line x1="16" y1="7" x2="16" y2="3" stroke="#DA7756" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="16" cy="2.5" r="2.5" fill="#DA7756"/>
       </svg>
       ForcenAI
     </a>
     <ul class="nav-links">
       <li><a href="#services" data-i18n="nav_services">Servicios</a></li>
       <li><a href="#process" data-i18n="nav_process">Proceso</a></li>
-      <li><a href="#about" data-i18n="nav_about">Sobre mí</a></li>
+      <li><a href="#about" data-i18n="nav_about">Trayectoria</a></li>
       <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
     </ul>
-    <div style="display:flex; align-items:center;">
-      <div class="lang-toggle">
-        <button onclick="setLanguage('es')" id="btn-es" class="active" data-i18n="lang_es">🇪🇸 ES</button>
-        <button onclick="setLanguage('en')" id="btn-en" data-i18n="lang_en">🇬🇧 EN</button>
+    <div style="display:flex; align-items:center; gap: 20px;">
+      <div class="lang-toggle lang-toggle-desktop">
+        <button onclick="setLanguage('es')" id="btn-es" class="active">🇪🇸 ES</button>
+        <button onclick="setLanguage('en')" id="btn-en">🇬🇧 EN</button>
       </div>
-      <a href="#contact" class="btn btn-primary nav-cta" data-i18n="nav_cta">Comenzar Proyecto</a>
+      <a href="#contact" class="btn btn-primary" style="padding: 12px 24px; font-size: 14px;" data-i18n="nav_cta">Comenzar</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
 
-<!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">✕</button>
-  <a href="#services" class="mobile-link" data-i18n="nav_services">Servicios</a>
-  <a href="#process" class="mobile-link" data-i18n="nav_process">Proceso</a>
-  <a href="#about" class="mobile-link" data-i18n="nav_about">Sobre mí</a>
-  <a href="#contact" class="mobile-link" data-i18n="nav_contact">Contacto</a>
-  <a href="#contact" class="btn btn-primary" style="margin-top:8px" data-i18n="nav_cta">Comenzar Proyecto</a>
-  <div class="mobile-contact-group">
-    <a href="mailto:alforcen2@gmail.com" class="btn btn-secondary">Email</a>
-    <a href="https://wa.me/34658207812" target="_blank" class="btn btn-whatsapp">WhatsApp</a>
-    <a href="https://www.linkedin.com/in/alfonsoforcen" target="_blank" class="btn btn-linkedin" data-i18n="nav_linkedin">LinkedIn</a>
-  </div>
-  <div class="lang-toggle" style="margin-top:24px; margin-right:0;">
-    <button onclick="setLanguage('es')" id="btn-es-mob" class="active">🇪🇸 ES</button>
+  <a href="#services" data-i18n="nav_services" class="mobile-link">Servicios</a>
+  <a href="#process" data-i18n="nav_process" class="mobile-link">Proceso</a>
+  <a href="#about" data-i18n="nav_about" class="mobile-link">Trayectoria</a>
+  <a href="#contact" data-i18n="nav_contact" class="mobile-link">Contacto</a>
+  <div class="lang-toggle" style="margin-top:20px;">
+    <button onclick="setLanguage('es')" id="btn-es-mob">🇪🇸 ES</button>
     <button onclick="setLanguage('en')" id="btn-en-mob">🇬🇧 EN</button>
   </div>
 </div>
 
-<!-- ═══ HERO ═══ -->
 <section id="hero">
   <div class="hero-bg"></div>
   <canvas id="particle-canvas"></canvas>
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-badge fade-up" data-i18n="hero_badge">
-          <span class="hero-badge-dot"></span>
-          Consultoría de IA impulsada por Claude
-        </div>
-        <h1 class="hero-h1 fade-up delay-1" data-i18n="hero_title">
-          Construimos Agentes de IA que Trabajan<br/><span>Mientras Duermes</span>
-        </h1>
-        <p class="hero-sub fade-up delay-2" data-i18n="hero_sub">
-          ForcenAI se especializa en automatización basada en Claude: agentes personalizados, sistemas de despacho multi-agente e integraciones MCP para empresas que quieren avanzar más rápido.
-        </p>
-        <div class="hero-btns fade-up delay-3">
-          <a href="#services" class="btn btn-primary" data-i18n="hero_cta_primary">Ver Servicios</a>
-          <a href="https://www.linkedin.com/in/alfonsoforcen" target="_blank" class="btn btn-linkedin" data-i18n="nav_linkedin">LinkedIn</a>
-          <a href="#about" class="btn btn-ghost" data-i18n="hero_cta_secondary">Ver Casos Prácticos</a>
-        </div>
-      </div>
-
-      <!-- Large alien mascot -->
-      <div class="hero-visual fade-up delay-2">
-        <div class="alien-wrapper">
-          <svg width="280" height="320" viewBox="0 0 280 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- glow blob behind -->
-            <ellipse cx="140" cy="175" rx="100" ry="115" fill="rgba(218,119,86,0.07)"/>
-
-            <!-- body subtle shadow -->
-            <ellipse cx="140" cy="310" rx="70" ry="10" fill="rgba(218,119,86,0.08)"/>
-
-            <!-- antenna stem -->
-            <line x1="140" y1="60" x2="140" y2="18" stroke="#DA7756" stroke-width="3" stroke-linecap="round"/>
-            <!-- antenna ball -->
-            <circle cx="140" cy="12" r="9" fill="#DA7756"/>
-            <circle cx="140" cy="12" r="5" fill="#FAF9F7" opacity="0.6"/>
-
-            <!-- head oval -->
-            <ellipse cx="140" cy="130" rx="80" ry="90" fill="#141414" stroke="#DA7756" stroke-width="2.5"/>
-            <!-- head inner highlight -->
-            <ellipse cx="130" cy="105" rx="22" ry="12" fill="rgba(218,119,86,0.06)" transform="rotate(-15 130 105)"/>
-
-            <!-- LEFT EYE -->
-            <ellipse cx="108" cy="125" rx="22" ry="27" fill="rgba(218,119,86,0.18)" stroke="#DA7756" stroke-width="2"/>
-            <ellipse cx="108" cy="125" rx="16" ry="20" fill="#DA7756" opacity="0.85"/>
-            <ellipse cx="108" cy="125" rx="9" ry="11" fill="#0A0A0A"/>
-            <!-- eye shine -->
-            <circle cx="112" cy="119" r="4" fill="rgba(250,249,247,0.7)"/>
-            <circle cx="105" cy="130" r="2" fill="rgba(250,249,247,0.3)"/>
-
-            <!-- RIGHT EYE -->
-            <ellipse cx="172" cy="125" rx="22" ry="27" fill="rgba(218,119,86,0.18)" stroke="#DA7756" stroke-width="2"/>
-            <ellipse cx="172" cy="125" rx="16" ry="20" fill="#DA7756" opacity="0.85"/>
-            <ellipse cx="172" cy="125" rx="9" ry="11" fill="#0A0A0A"/>
-            <circle cx="176" cy="119" r="4" fill="rgba(250,249,247,0.7)"/>
-            <circle cx="169" cy="130" r="2" fill="rgba(250,249,247,0.3)"/>
-
-            <!-- nose dots -->
-            <circle cx="134" cy="162" r="3.5" fill="#DA7756" opacity="0.5"/>
-            <circle cx="146" cy="162" r="3.5" fill="#DA7756" opacity="0.5"/>
-
-            <!-- mouth happy curve -->
-            <path d="M112 178 Q140 200 168 178" stroke="#DA7756" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <path d="M115 180 Q140 196 165 180" stroke="rgba(218,119,86,0.3)" stroke-width="6" stroke-linecap="round" fill="none"/>
-
-            <!-- ear nubs -->
-            <ellipse cx="62" cy="120" rx="10" ry="18" fill="#141414" stroke="#DA7756" stroke-width="2"/>
-            <ellipse cx="218" cy="120" rx="10" ry="18" fill="#141414" stroke="#DA7756" stroke-width="2"/>
-
-            <!-- body/torso -->
-            <rect x="90" y="212" width="100" height="70" rx="20" fill="#141414" stroke="#DA7756" stroke-width="2"/>
-            <!-- chest detail -->
-            <rect x="116" y="228" width="48" height="24" rx="8" fill="rgba(218,119,86,0.12)" stroke="rgba(218,119,86,0.3)" stroke-width="1"/>
-            <circle cx="128" cy="240" r="4" fill="#DA7756" opacity="0.6"/>
-            <circle cx="140" cy="240" r="4" fill="#DA7756" opacity="0.9"/>
-            <circle cx="152" cy="240" r="4" fill="#DA7756" opacity="0.6"/>
-
-            <!-- arms -->
-            <ellipse cx="74" cy="242" rx="14" ry="28" rx="14" ry="28" fill="#141414" stroke="#DA7756" stroke-width="2" transform="rotate(12 74 242)"/>
-            <ellipse cx="206" cy="242" rx="14" ry="28" fill="#141414" stroke="#DA7756" stroke-width="2" transform="rotate(-12 206 242)"/>
-
-            <!-- legs -->
-            <ellipse cx="118" cy="300" rx="16" ry="12" fill="#141414" stroke="#DA7756" stroke-width="2"/>
-            <ellipse cx="162" cy="300" rx="16" ry="12" fill="#141414" stroke="#DA7756" stroke-width="2"/>
-
-            <!-- sparkle accents -->
-            <path d="M44 60 L46 54 L48 60 L54 62 L48 64 L46 70 L44 64 L38 62 Z" fill="#DA7756" opacity="0.5"/>
-            <path d="M228 40 L229.5 35.5 L231 40 L235.5 41.5 L231 43 L229.5 47.5 L228 43 L223.5 41.5 Z" fill="#DA7756" opacity="0.4"/>
-            <circle cx="252" cy="85" r="3" fill="#DA7756" opacity="0.3"/>
-            <circle cx="30" cy="150" r="2.5" fill="#DA7756" opacity="0.25"/>
-          </svg>
-        </div>
-      </div>
+  <div class="container hero-inner">
+    <div class="hero-badge fade-up">
+      <div class="hero-badge-dot"></div>
+      <span data-i18n="hero_badge">Executive AI Agent Consultancy</span>
+    </div>
+    <h1 class="hero-h1 fade-up delay-1" data-i18n="hero_title">
+      Construimos Agentes de IA que Trabajan<br/><span>Mientras Duermes</span>
+    </h1>
+    <p class="hero-sub fade-up delay-2" data-i18n="hero_sub">
+      Escalamos empresas con automatización de nivel corporativo. Experiencia probada en Apple y Samsung Global HQ para desplegar ecosistemas agénticos de Claude.
+    </p>
+    <div class="hero-btns fade-up delay-3">
+      <a href="#services" class="btn btn-primary" data-i18n="hero_cta_primary">Explorar Servicios</a>
+      <a href="https://www.linkedin.com/in/alfonsoforcen" target="_blank" class="btn btn-ghost">LinkedIn</a>
     </div>
   </div>
 </section>
 
-<!-- ═══ SERVICES ═══ -->
+<section class="experience-wall">
+  <div class="container">
+    <div class="exp-inner fade-up">
+      <div class="exp-logo"><svg viewBox="0 0 24 24"><path d="M17.073 21.376c-.632.333-1.42.593-2.181.593-.664 0-1.121-.219-1.393-.563-.263-.332-.303-.7-.303-.708 0-.008.006-.013.013-.016h.023c.091.079.52.417 1.353.417 1.157 0 2.222-1.026 2.222-1.111 0-.012-.008-.016-.015-.015-.152.008-.5.016-.86.016-1.144 0-2.221-.497-2.221-1.383 0-.82.684-1.385 1.547-1.385s1.468.423 1.83.676c.005.004.01.002.01-.005.002-.128.002-.256.002-.384 0-.464-.265-1.127-.798-1.574-.523-.465-1.25-.713-1.956-.713s-1.85.343-2.613.916c-.006.004-.012.001-.013-.005l-.014-.031c-.002-.005.002-.01.008-.014 1.34-1.002 2.766-1.298 3.518-1.298.791 0 1.579.24 2.203.791.637.564.912 1.379.912 2.15v3.46c0 .324.032.656.096.945l.004.015c.002.011-.008.019-.015.014a4.12 4.12 0 01-.11-.09zM4.773 14.391c.004-.326 0-.649.034-.972.103-1.021.57-2.316 1.487-3.218.892-.876 2.126-1.229 3.033-1.229.01 0 .015.005.015.013 0 .04-.006.079-.006.118s-.019.076-.013.111c-1.32.179-2.344 1.107-2.903 2.154-.003.007.001.014.009.015h.02c.707-.156 1.387-.14 1.944-.067.006.001.01.007.01.013s-.004.015-.01.018c-1.382.721-2.033 2.053-1.984 3.425.04 1.114.653 2.008 1.583 2.147.01.001.01.01.007.016-.273.203-.75.466-1.527.466-1.144 0-1.745-.635-1.745-2-.001-.417.025-.836.039-1.25zM12.44 6c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8z"/></svg>Apple EMEIA HQ</div>
+      <div class="exp-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>Samsung Regional HQ</div>
+    </div>
+  </div>
+</section>
+
+<section class="carousel-section">
+  <div class="container" style="margin-bottom: 20px; text-align: center;">
+    <p class="section-label">Ecosystem</p>
+    <h2 class="section-title">Seamless Automation</h2>
+  </div>
+  <div class="carousel-track-container">
+    <div class="carousel-track">
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M4.15 4.3v15.4c0 .54.44.97.98.97h13.74c.54 0 .98-.43.98-.97V4.3c0-.54-.44-.97-.98-.97H5.13c-.54 0-.98.43-.98.97z"/><path d="M7.5 7h4v1.5h-4zM7.5 10h9v1.5h-9zM7.5 13h9v1.5h-9zM7.5 16h7v1.5h-7z" fill="var(--bg)"/></svg><span>Notion</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span>Gmail</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M6 12.5C6 11.12 7.12 10 8.5 10s2.5 11.12 2.5 12.5S9.88 25 8.5 25 6 23.88 6 22.5zM12.5 6C13.88 6 15 7.12 15 8.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5S11.12 6 12.5 6z"/></svg><span>Slack</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg><span>HubSpot</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5z"/></svg><span>Airtable</span></div>
+      <div class="integration-card others"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="var(--accent)" stroke-width="2"/></svg><span>Custom Tools</span></div>
+      <!-- Clones -->
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M4.15 4.3v15.4c0 .54.44.97.98.97h13.74c.54 0 .98-.43.98-.97V4.3c0-.54-.44-.97-.98-.97H5.13c-.54 0-.98.43-.98.97z"/><path d="M7.5 7h4v1.5h-4zM7.5 10h9v1.5h-9zM7.5 13h9v1.5h-9zM7.5 16h7v1.5h-7z" fill="var(--bg)"/></svg><span>Notion</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span>Gmail</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M6 12.5C6 11.12 7.12 10 8.5 10s2.5 11.12 2.5 12.5S9.88 25 8.5 25 6 23.88 6 22.5zM12.5 6C13.88 6 15 7.12 15 8.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5S11.12 6 12.5 6z"/></svg><span>Slack</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg><span>HubSpot</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5z"/></svg><span>Airtable</span></div>
+      <div class="integration-card others"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="var(--accent)" stroke-width="2"/></svg><span>Custom Tools</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="services" class="section">
   <div class="container">
-    <div class="services-header fade-up">
-      <p class="section-label" data-i18n="services_label">What We We Do</p>
-      <h2 class="section-title" data-i18n="services_title">Services Built Around<br/>Agentic AI</h2>
-      <p class="section-sub" data-i18n="services_sub">From a single automation to enterprise-scale multi-agent pipelines — we deliver production-ready Claude integrations.</p>
-    </div>
+    <p class="section-label" data-i18n="services_label">Expertise</p>
+    <h2 class="section-title" data-i18n="services_title">Servicios Diseñados para la IA Agéntica</h2>
+    <p class="section-sub" data-i18n="services_sub">Soluciones de alto rendimiento orquestadas por Claude y construidas con rigor corporativo.</p>
     <div class="services-grid">
-
+      <div class="service-card fade-up">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12L2.1 12.1"/><path d="M12 12l9.9 0.1"/></svg></div>
+        <h3 data-i18n="service1_title">Creación de Agentes de IA</h3>
+        <p data-i18n="service1_desc">Agentes autónomos personalizados que manejan flujos de trabajo complejos sin intervención manual.</p>
+      </div>
       <div class="service-card fade-up delay-1">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l2 2 4-4"/></svg>
-        </div>
-        <h3 class="service-title" data-i18n="service1_title">AI Agent Creation</h3>
-        <p class="service-desc" data-i18n="service1_desc">Custom Claude-powered agents that handle complex workflows autonomously. From single-purpose bots to full agentic systems.</p>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg></div>
+        <h3 data-i18n="service2_title">Integración de Claude</h3>
+        <p data-i18n="service2_desc">Implementación experta en tus sistemas existentes para una operativa segura y de alto rendimiento.</p>
       </div>
-
       <div class="service-card fade-up delay-2">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v4M5 17l5-4M19 17l-5-4"/></svg>
-        </div>
-        <h3 class="service-title" data-i18n="service2_title">Dispatch Architecture</h3>
-        <p class="service-desc" data-i18n="service2_desc">Multi-agent orchestration systems that route tasks intelligently across specialised agents — just like Claude's own Dispatch.</p>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+        <h3 data-i18n="service3_title">Estrategia de IA</h3>
+        <p data-i18n="service3_desc">Consultoría de alto nivel para identificar oportunidades con máximo retorno de inversión (ROI).</p>
       </div>
-
       <div class="service-card fade-up delay-3">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <h3 class="service-title" data-i18n="service3_title">Claude Integration</h3>
-        <p class="service-desc" data-i18n="service3_desc">Embed Claude into your existing products, APIs, and internal tools. Fast deployment, production-ready from day one.</p>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15"/></svg></div>
+        <h3 data-i18n="service4_title">Formación de Equipos</h3>
+        <p data-i18n="service4_desc">Capacitación especializada para que tu equipo domine el uso de agentes de IA en el día a día.</p>
       </div>
-
-      <div class="service-card fade-up delay-1">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        </div>
-        <h3 class="service-title" data-i18n="service4_title">MCP Development</h3>
-        <p class="service-desc" data-i18n="service4_desc">Custom Model Context Protocol servers that give your agents access to any system, database, or API you already use.</p>
-      </div>
-
-      <div class="service-card fade-up delay-2">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M2 20h20M6 20V10M12 20V4M18 20v-6"/></svg>
-        </div>
-        <h3 class="service-title" data-i18n="service5_title">AI Strategy Consulting</h3>
-        <p class="service-desc" data-i18n="service5_desc">Roadmaps and frameworks to identify where AI agents deliver the most ROI in your organisation's workflows.</p>
-      </div>
-
-      <div class="service-card fade-up delay-3">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3 class="service-title" data-i18n="service6_title">Training &amp; Enablement</h3>
-        <p class="service-desc" data-i18n="service6_desc">Upskill your team to work alongside AI agents effectively. Workshops, playbooks, and ongoing support to keep pace.</p>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══ WHY CLAUDE ═══ -->
 <section id="why" class="section">
   <div class="container">
     <div class="fade-up">
       <p class="section-label" data-i18n="why_label">Our Foundation</p>
-      <h2 class="section-title" data-i18n="why_title">Why We Build on Claude</h2>
-      <p class="section-sub" data-i18n="why_sub">Not all models are equal when it comes to agentic work. We chose Claude for every reason that matters.</p>
+      <h2 class="section-title" data-i18n="why_title">Why Claude</h2>
     </div>
     <div class="why-grid">
-      <div class="why-card fade-up delay-1">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3 class="why-title" data-i18n="why_card1_title">Safest &amp; Most Capable</h3>
-        <p class="why-desc" data-i18n="why_card1_desc">Claude consistently leads safety benchmarks without sacrificing performance. It reasons carefully, refuses appropriately, and stays on task.</p>
-      </div>
-      <div class="why-card fade-up delay-2">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M20 12h2M2 12h2M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41"/></svg>
-        </div>
-        <h3 class="why-title" data-i18n="why_card2_title">Best for Agents</h3>
-        <p class="why-desc" data-i18n="why_card2_desc">Claude's long context window, tool use fidelity, and instruction-following make it uniquely suited to autonomous, multi-step agentic tasks.</p>
-      </div>
-      <div class="why-card fade-up delay-3">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <h3 class="why-title" data-i18n="why_card3_title">Enterprise-Ready</h3>
-        <p class="why-desc" data-i18n="why_card3_desc">Anthropic's enterprise tier offers the controls, compliance guarantees, and SLAs that serious organisations need before deploying at scale.</p>
-      </div>
+      <div class="why-card fade-up"><h3>Security First</h3><p data-i18n="why_card1_desc">Claude leads benchmarks in safety and reasoning, essential for enterprise deployments.</p></div>
+      <div class="why-card fade-up delay-1"><h3>Agent Native</h3><p data-i18n="why_card2_desc">Built with long context and tool fidelity that makes autonomous agents reliable.</p></div>
+      <div class="why-card fade-up delay-2"><h3>Scalability</h3><p data-i18n="why_card3_desc">Enterprise-grade SLAs and protocol support via MCP for seamless data access.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PROCESS ═══ -->
 <section id="process" class="section">
   <div class="container">
-    <div class="process-header fade-up">
-      <p class="section-label" data-i18n="process_label">How We Work</p>
-      <h2 class="section-title" data-i18n="process_title">From Idea to Deployed Agent</h2>
-      <p class="section-sub" data-i18n="process_sub">A clear, collaborative process built for speed without cutting corners.</p>
-    </div>
+    <p class="section-label" data-i18n="process_label">Workflow</p>
+    <h2 class="section-title" data-i18n="process_title">Propelled to Deployment</h2>
     <div class="process-steps">
-      <div class="process-step fade-up delay-1">
-        <div class="step-num">1</div>
-        <h3 class="step-title" data-i18n="step1_title">Discover</h3>
-        <p class="step-desc" data-i18n="step1_desc">We map your workflows, identify automation opportunities, and define scope with clear success metrics.</p>
-      </div>
-      <div class="process-step fade-up delay-2">
-        <div class="step-num">2</div>
-        <h3 class="step-title" data-i18n="step2_title">Architect</h3>
-        <p class="step-desc" data-i18n="step2_desc">We design the agent system — tools, prompts, memory strategy, and integration points — before writing a line of code.</p>
-      </div>
-      <div class="process-step fade-up delay-3">
-        <div class="step-num">3</div>
-        <h3 class="step-title" data-i18n="step3_title">Build &amp; Test</h3>
-        <p class="step-desc" data-i18n="step3_desc">Iterative development with continuous eval loops. Every agent is stress-tested on edge cases before handoff.</p>
-      </div>
-      <div class="process-step fade-up delay-4">
-        <div class="step-num">4</div>
-        <h3 class="step-title" data-i18n="step4_title">Deploy &amp; Monitor</h3>
-        <p class="step-desc" data-i18n="step4_desc">We ship to production, set up observability dashboards, and provide ongoing optimisation support post-launch.</p>
-      </div>
+      <div class="process-step fade-up"><div class="step-num">01</div><h3 class="step-title" data-i18n="step1_title">Discover</h3><p class="step-desc">Mapping workflows and defining success metrics.</p></div>
+      <div class="process-step fade-up delay-1"><div class="step-num">02</div><h3 class="step-title" data-i18n="step2_title">Architect</h3><p class="step-desc">Designing the agent logic, tools, and memory stacks.</p></div>
+      <div class="process-step fade-up delay-2"><div class="step-num">03</div><h3 class="step-title" data-i18n="step3_title">Build</h3><p class="step-desc">Full development with rigorous stress-testing loops.</p></div>
+      <div class="process-step fade-up delay-3"><div class="step-num">04</div><h3 class="step-title" data-i18n="step4_title">Monitor</h3><p class="step-desc">Launch and ongoing optimization for maximum ROI.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ ABOUT ═══ -->
 <section id="about" class="section">
   <div class="container">
     <div class="about-inner">
       <div class="about-avatar fade-up">
-        <div class="avatar-ring">
-          <!-- Large alien for about section -->
-          <svg width="140" height="155" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="70" y1="28" x2="70" y2="8" stroke="#DA7756" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="70" cy="5" r="5.5" fill="#DA7756"/>
-            <ellipse cx="70" cy="82" rx="46" ry="52" fill="#141414" stroke="#DA7756" stroke-width="2"/>
-            <!-- eyes -->
-            <ellipse cx="52" cy="76" rx="13" ry="16" fill="#DA7756" opacity="0.85"/>
-            <ellipse cx="88" cy="76" rx="13" ry="16" fill="#DA7756" opacity="0.85"/>
-            <ellipse cx="52" cy="76" rx="7" ry="9" fill="#0A0A0A"/>
-            <ellipse cx="88" cy="76" rx="7" ry="9" fill="#0A0A0A"/>
-            <circle cx="55" cy="72" r="2.5" fill="rgba(250,249,247,0.7)"/>
-            <circle cx="91" cy="72" r="2.5" fill="rgba(250,249,247,0.7)"/>
-            <!-- mouth -->
-            <path d="M56 100 Q70 112 84 100" stroke="#DA7756" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <!-- ears -->
-            <ellipse cx="26" cy="76" rx="7" ry="12" fill="#141414" stroke="#DA7756" stroke-width="1.5"/>
-            <ellipse cx="114" cy="76" rx="7" ry="12" fill="#141414" stroke="#DA7756" stroke-width="1.5"/>
-          </svg>
+        <div class="avatar-bg"></div>
+        <div class="avatar-frame">
+          <svg width="200" height="200" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" stroke="var(--accent)" stroke-width="0.5" fill="rgba(218,119,86,0.05)"/><path d="M16 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM8 24a8 8 0 0 1 16 0" stroke="var(--accent)" stroke-width="1.5" fill="none"/></svg>
         </div>
       </div>
-      <div class="about-text fade-up delay-2">
-        <p class="section-label" data-i18n="about_label">About</p>
-        <h2 data-i18n="about_title">Hola, I'm <span style="color:var(--accent)">Alfonso</span></h2>
-        <p data-i18n="about_text1">I'm the founder of ForcenAI — an AI agent consultancy focused exclusively on Claude-powered systems. I've spent years working at the intersection of software engineering and applied AI, and I started ForcenAI to help businesses move beyond chatbots into real agentic automation.</p>
-        <p data-i18n="about_text2">Whether it's a single workflow agent or a complex multi-agent dispatch system, every project gets my direct attention. <strong>Quality over volume.</strong></p>
-        <p data-i18n="about_text3">📍 <strong>Based in Zaragoza, Spain.</strong> Working with teams globally — remote-first, async-friendly.</p>
+      <div class="about-text fade-up delay-1">
+        <p class="section-label" data-i18n="about_label">Trayectoria</p>
+        <h2 class="section-title" data-i18n="about_title">Elite AI Expertise</h2>
+        <p data-i18n="about_text1">Soy Alfonso, fundador de ForcenAI. Con más de 6 años de experiencia en IA y automatización, he trabajado en las sedes mundiales de <strong>Apple (EMEIA HQ)</strong> y actualmente en <strong>Samsung (Regional HQ)</strong>.</p>
+        <p data-i18n="about_text2">Ingeniero de Telecomunicaciones con un MBA galardonado con el Premio a la Excelencia, aplico rigor corporativo a cada agente que construimos.</p>
         <div class="about-stats">
-          <div class="stat">
-            <div class="stat-num">30+</div>
-            <div class="stat-label" data-i18n="stat1_label">Agents Deployed</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">100%</div>
-            <div class="stat-label" data-i18n="stat2_label">Claude-Powered</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">Global</div>
-            <div class="stat-label" data-i18n="stat3_label">Client Reach</div>
-          </div>
+          <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Years AI exp</span></div>
+          <div class="stat"><span class="stat-num">ICEX</span><span class="stat-label">Award MBA</span></div>
+          <div class="stat"><span class="stat-num">Global</span><span class="stat-label">Reach</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CONTACT ═══ -->
 <section id="contact" class="section">
   <div class="container">
     <div class="contact-inner">
       <div class="contact-info fade-up">
-        <p class="section-label" data-i18n="contact_label">Get in Touch</p>
-        <h2 data-i18n="contact_title">Let's Build Something<br/><span style="color:var(--accent)">Together</span></h2>
-        <p data-i18n="contact_sub">Have a workflow that needs automating? A product that needs Claude embedded? Or just want to explore what's possible? Drop a message and I'll get back to you within 24 hours.</p>
+        <p class="section-label" data-i18n="contact_label">Let's Connect</p>
+        <h2 class="section-title" data-i18n="contact_title">Hablemos de tu Proyecto</h2>
         <div class="contact-methods">
-          <a href="mailto:alforcen2@gmail.com" class="contact-email">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            alforcen2@gmail.com
+          <a href="mailto:alforcen2@gmail.com" class="contact-method">
+            <div class="contact-method-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="contact-method-text"><h4>Email Direct</h4><p>alforcen2@gmail.com</p></div>
           </a>
-          <a href="https://wa.me/34658207812" target="_blank" class="contact-whatsapp">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            +34 658 207 812
-          </a>
-          <a href="https://www.linkedin.com/in/alfonsoforcen" target="_blank" class="contact-linkedin" data-i18n="nav_linkedin">
-            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            LinkedIn
+          <a href="https://wa.me/34658207812" target="_blank" class="contact-method">
+            <div class="contact-method-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+            <div class="contact-method-text"><h4>WhatsApp</h4><p>+34 658 207 812</p></div>
           </a>
         </div>
       </div>
-      <div class="fade-up delay-2">
-        <form id="contactForm" action="https://formspree.io/f/alforcen2@gmail.com" method="POST" novalidate>
-          <div class="form-group">
-            <label for="name" data-i18n="form_name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Ada Lovelace" required />
-          </div>
-          <div class="form-group">
-            <label for="company" data-i18n="form_company">Company (Optional)</label>
-            <input type="text" id="company" name="company" placeholder="Your Company" />
-          </div>
-          <div class="form-group">
-            <label for="email" data-i18n="form_email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="ada@example.com" required />
-          </div>
-          <div class="form-group">
-            <label for="message" data-i18n="form_message">Message</label>
-            <textarea id="message" name="message" required data-i18n="form_message_default">Hello Alfonso, I'd like to talk about how ForcenAI can help me with...</textarea>
-          </div>
-          <button type="submit" class="btn-submit" data-i18n="form_submit">Send Message →</button>
-          <div class="form-success" id="formSuccess" data-i18n="form_success">
-            ✓ Message received! I'll be in touch within 24 hours.
-          </div>
+      <div class="fade-up delay-1">
+        <form id="contactForm" action="https://formspree.io/f/alforcen2@gmail.com" method="POST">
+          <input type="text" name="name" id="name" placeholder="Nombre completo" required />
+          <input type="text" name="company" id="company" placeholder="Empresa (opcional)" />
+          <input type="email" name="email" id="email" placeholder="Email corporativo" required />
+          <textarea name="message" id="message" placeholder="¿Cómo podemos ayudarte?" required></textarea>
+          <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+          <div id="formSuccess" style="display:none; color:var(--accent); margin-top:15px; font-weight:600;">✓ Mensaje enviado. Responderemos en menos de 24h.</div>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
+<footer style="padding: 60px 0; background: #050505; border-top: 1px solid var(--border); text-align: center;">
   <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="#" class="footer-logo">
-          <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
-            <ellipse cx="14" cy="15.5" rx="8.5" ry="9.5" stroke="#DA7756" stroke-width="1.5"/>
-            <line x1="14" y1="6" x2="14" y2="2" stroke="#DA7756" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="14" cy="1.5" r="1.5" fill="#DA7756"/>
-            <ellipse cx="10.5" cy="14" rx="2.5" ry="3" fill="#DA7756" opacity="0.9"/>
-            <ellipse cx="17.5" cy="14" rx="2.5" ry="3" fill="#DA7756" opacity="0.9"/>
-            <circle cx="11" cy="13.5" r="0.9" fill="#0A0A0A"/>
-            <circle cx="18" cy="13.5" r="0.9" fill="#0A0A0A"/>
-            <path d="M11 19.5 Q14 21.5 17 19.5" stroke="#DA7756" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-          </svg>
-          ForcenAI
-        </a>
-        <p class="footer-tagline" data-i18n="footer_tagline">Building the agentic future, one workflow at a time.</p>
-      </div>
-      <div class="footer-links">
-        <a href="https://github.com/alforcen2" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub
-        </a>
-        <a href="mailto:alforcen2@gmail.com">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Email
-        </a>
-        <a href="https://www.linkedin.com/in/alfonsoforcen" target="_blank" data-i18n="nav_linkedin">
-          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-    </div>
-    <p class="footer-copy" data-i18n="footer_copy">© 2026 ForcenAI. All rights reserved. Built with Claude.</p>
+    <p style="color: var(--muted); font-size: 14px;">&copy; 2026 ForcenAI. Built with Excellence.</p>
   </div>
 </footer>
 
 <script>
-  // ── Particle canvas ──
+  // Particles
   (function() {
     var canvas = document.getElementById('particle-canvas');
     var ctx = canvas.getContext('2d');
     var particles = [];
     var W, H;
-
-    function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
     function Particle() {
-      this.x = Math.random() * W;
-      this.y = Math.random() * H;
-      this.vx = (Math.random() - 0.5) * 0.3;
-      this.vy = (Math.random() - 0.5) * 0.3;
-      this.r = Math.random() * 1.5 + 0.5;
-      this.alpha = Math.random() * 0.5 + 0.1;
+      this.x = Math.random() * W; this.y = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+      this.r = Math.random() * 1.5;
     }
-
-    Particle.prototype.update = function() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0) this.x = W;
-      if (this.x > W) this.x = 0;
-      if (this.y < 0) this.y = H;
-      if (this.y > H) this.y = 0;
+    Particle.prototype.draw = function() {
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(218,119,86,0.3)'; ctx.fill();
     };
-
-    function init() {
-      resize();
-      particles = [];
-      for (var i = 0; i < 80; i++) particles.push(new Particle());
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        p.update();
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(218,119,86,' + p.alpha + ')';
-        ctx.fill();
-        // draw lines to nearby particles
-        for (var j = i + 1; j < particles.length; j++) {
-          var q = particles[j];
-          var dx = p.x - q.x, dy = p.y - q.y;
-          var dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = 'rgba(218,119,86,' + (0.08 * (1 - dist/100)) + ')';
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-
-    window.addEventListener('resize', init);
-    init();
-    draw();
+    Particle.prototype.update = function() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < 0) this.x = W; if (this.x > W) this.x = 0;
+      if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
+    };
+    for (var i = 0; i < 60; i++) particles.push(new Particle());
+    function anim() { ctx.clearRect(0,0,W,H); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(anim); }
+    anim();
   })();
 
-  // ── Scroll fade-in ──
-  (function() {
-    var els = document.querySelectorAll('.fade-up');
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    els.forEach(function(el) { observer.observe(el); });
+  // Scroll Reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-    // Hero elements visible immediately
-    var heroEls = document.querySelectorAll('#hero .fade-up');
-    setTimeout(function() {
-      heroEls.forEach(function(el) { el.classList.add('visible'); });
-    }, 100);
-  })();
+  // Nav Scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
 
-  // ── Nav scroll style ──
-  (function() {
-    var nav = document.getElementById('navbar');
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 60) {
-        nav.style.background = 'rgba(10,10,10,0.97)';
-      } else {
-        nav.style.background = 'rgba(10,10,10,0.85)';
-      }
-    });
-  })();
+  // Mobile Menu
+  const ham = document.getElementById('hamburger');
+  const mm = document.getElementById('mobileMenu');
+  ham.onclick = () => mm.classList.add('active');
+  document.getElementById('mobileClose').onclick = () => mm.classList.remove('active');
+  document.querySelectorAll('.mobile-link').forEach(l => l.onclick = () => mm.classList.remove('active'));
 
-  // ── Mobile menu ──
-  (function() {
-    var btn = document.getElementById('hamburger');
-    var menu = document.getElementById('mobileMenu');
-    var close = document.getElementById('mobileClose');
-    var links = document.querySelectorAll('.mobile-link');
-
-    btn.addEventListener('click', function() { menu.classList.add('open'); });
-    close.addEventListener('click', function() { menu.classList.remove('open'); });
-    links.forEach(function(l) {
-      l.addEventListener('click', function() { menu.classList.remove('open'); });
-    });
-  })();
-
-  // ── Contact form (demo) ──
-  (function() {
-    var form = document.getElementById('contactForm');
-    var success = document.getElementById('formSuccess');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var name = form.name.value.trim();
-      var email = form.email.value.trim();
-      var msg = form.message.value.trim();
-      if (!name || !email || !msg) return;
-      // In production, wire to your backend or Formspree
-      form.querySelector('.btn-submit').textContent = 'Sending…';
-      setTimeout(function() {
-        form.reset();
-        form.querySelector('.btn-submit').textContent = 'Send Message →';
-        success.style.display = 'block';
-        setTimeout(function() { success.style.display = 'none'; }, 5000);
-      }, 900);
-    });
-  })();
-
-  // ── Multi-language ──
+  // Multi-language
   const translations = {
     es: {
-      page_title: "ForcenAI — Consultoría de Agentes de IA impulsada por Claude",
-      meta_description: "ForcenAI se especializa en automatización basada en Claude: agentes personalizados, sistemas de despacho multi-agente e integraciones MCP.",
-      nav_services: "Servicios",
-      nav_process: "Proceso",
-      nav_about: "Sobre mí",
-      nav_contact: "Contacto",
-      nav_cta: "Comenzar Proyecto",
-      nav_linkedin: "LinkedIn",
-      lang_es: "🇪🇸 ES",
-      lang_en: "🇬🇧 EN",
-      hero_badge: "Consultoría de IA impulsada por Claude",
+      nav_services: "Servicios", nav_process: "Proceso", nav_about: "Trayectoria", nav_contact: "Contacto", nav_cta: "Comenzar",
+      hero_badge: "Executive AI Agent Consultancy",
       hero_title: "Construimos Agentes de IA que Trabajan<br/><span>Mientras Duermes</span>",
-      hero_sub: "ForcenAI se especializa en automatización basada en Claude: agentes personalizados, sistemas de despacho multi-agente e integraciones MCP para empresas que quieren avanzar más rápido.",
-      hero_cta_primary: "Ver Servicios",
-      hero_cta_secondary: "Ver Casos Prácticos",
-      services_label: "Qué Hacemos",
-      services_title: "Servicios Diseñados para la<br/>IA Agéntica",
-      services_sub: "Desde una única automatización hasta pipelines multi-agente a escala empresarial — entregamos integraciones de Claude listas para producción.",
-      service1_title: "Creación de Agentes de IA",
-      service1_desc: "Agentes personalizados impulsados por Claude que manejan flujos de trabajo complejos de forma autónoma. Desde bots específicos hasta sistemas agénticos completos.",
-      service2_title: "Arquitectura de Despacho",
-      service2_desc: "Sistemas de orquestación multi-agente que enrutan tareas de forma inteligente entre agentes especializados, como el propio Dispatch de Claude.",
-      service3_title: "Integración de Claude",
-      service3_desc: "Integra Claude en tus productos, APIs y herramientas internas actuales. Despliegue rápido y listo para producción desde el primer día.",
-      service4_title: "Desarrollo de MCP",
-      service4_desc: "Servidores personalizados del Protocolo de Contexto de Modelo que dan a tus agentes acceso a cualquier sistema, base de datos o API que ya utilices.",
-      service5_title: "Consultoría de Estrategia de IA",
-      service5_desc: "Hojas de ruta y marcos para identificar dónde los agentes de IA ofrecen el mayor retorno de inversión en los procesos de tu organización.",
-      service6_title: "Formación y Capacitación",
-      service6_desc: "Mejora las habilidades de tu equipo para trabajar junto con agentes de IA de manera efectiva. Talleres, guías y soporte continuo para mantener el ritmo.",
-      why_label: "Nuestra Base",
-      why_title: "Por qué construimos sobre Claude",
-      why_sub: "No todos los modelos son iguales para el trabajo agéntico. Elegimos Claude por todas las razones que importan.",
-      why_card1_title: "Más Seguro y Capaz",
-      why_card1_desc: "Claude lidera consistentemente los estándares de seguridad sin sacrificar el rendimiento. Razona con cuidado y se mantiene enfocado en la tarea.",
-      why_card2_title: "El Mejor para Agentes",
-      why_card2_desc: "La amplia ventana de contexto de Claude, su precisión con herramientas y el seguimiento de instrucciones lo hacen ideal para tareas agénticas autónomas.",
-      why_card3_title: "Listo para Empresas",
-      why_card3_desc: "El nivel empresarial de Anthropic ofrece el control, cumplimiento y las garantías que las organizaciones serias necesitan antes de desplegar a gran escala.",
-      process_label: "Cómo Trabajamos",
-      process_title: "De la Idea al Agente Desplegado",
-      process_sub: "Un proceso claro y colaborativo diseñado para la velocidad sin comprometer la calidad.",
-      step1_title: "Descubrimiento",
-      step1_desc: "Mapeamos tus flujos de trabajo, identificamos oportunidades de automatización y definimos el alcance con métricas de éxito claras.",
-      step2_title: "Arquitectura",
-      step2_desc: "Diseñamos el sistema de agentes: herramientas, prompts, estrategia de memoria y puntos de integración, antes de programar.",
-      step3_title: "Construcción y Pruebas",
-      step3_desc: "Desarrollo iterativo con bucles continuos de evaluación. Cada agente es probado ante casos límite antes de su entrega.",
-      step4_title: "Despliegue y Monitoreo",
-      step4_desc: "Lanzamos a producción, configuramos paneles de control y proporcionamos soporte continuo de optimización tras el lanzamiento.",
-      about_label: "Sobre mí",
-      about_title: "Hola, soy <span style=\"color:var(--accent)\">Alfonso</span>",
-      about_text1: "Consultor de IA especializado en sistemas impulsados por Claude. He pasado años en la intersección de ingeniería de software e IA aplicada, y fundé ForcenAI para ayudar a las empresas a ir más allá de los chatbots hacia la verdadera automatización agéntica.",
-      about_text2: "Ya sea un agente de flujo de trabajo único o un sistema complejo multi-agente, cada proyecto cuenta con mi atención directa. <strong>Calidad sobre volumen.</strong>",
-      about_text3: "📍 <strong>Ubicado en Zaragoza, España.</strong> Trabajo con equipos a nivel global: remoto y asíncrono.",
-      stat1_label: "Agentes Desplegados",
-      stat2_label: "Impulsado por Claude",
-      stat3_label: "Alcance Global",
-      contact_label: "Contacto",
-      contact_title: "Construyamos algo <span style=\"color:var(--accent)\">juntos</span>",
-      contact_sub: "¿Tienes un flujo de trabajo que automatizar? ¿Un producto que integrar con Claude? ¿O quieres explorar qué es posible? Escríbeme y te responderé en menos de 24 horas.",
-      form_name: "Tu Nombre",
-      form_company: "Empresa (Opcional)",
-      form_email: "Correo Electrónico",
-      form_message: "Mensaje",
-      form_message_default: "Hola Alfonso, me gustaría hablar sobre cómo ForcenAI puede ayudarme con...",
-      form_submit: "Enviar Mensaje →",
-      form_success: "✓ ¡Mensaje recibido! Me pondré en contacto contigo en menos de 24 horas.",
-      footer_tagline: "Construyendo el futuro agéntico, un flujo de trabajo a la vez.",
-      footer_copy: "© 2026 ForcenAI. Todos los derechos reservados. Creado con Claude."
+      hero_sub: "Escalamos empresas con automatización de nivel corporativo. Experiencia probada en Apple y Samsung HQ para desplegar ecosistemas de Claude.",
+      hero_cta_primary: "Explorar Servicios",
+      services_label: "Expertise", services_title: "Servicios de IA Agéntica", services_sub: "Ecosistemas inteligentes orquestados con rigor corporativo.",
+      service1_title: "Creación de Agentes", service1_desc: "Agentes autónomos que ejecutan flujos de trabajo complejos sin intervención.",
+      service2_title: "Integración de Claude", service2_desc: "Implementación experta en sistemas existentes para operativa de alta seguridad.",
+      service3_title: "Estrategia de IA", service3_desc: "Consultoría estratégica para identificar automatizaciones con máximo ROI.",
+      service4_title: "Formación de Equipos", service4_desc: "Capacitación de alto nivel para dominar la IA en el flujo de trabajo diario.",
+      why_label: "Nuestro Pilar", why_title: "Por qué Claude",
+      process_label: "Workflow", process_title: "Del Concepto al Despliegue",
+      step1_title: "Descubrir", step2_title: "Arquitectar", step3_title: "Construir", step4_title: "Optimizar",
+      about_label: "Trayectoria", about_title: "Experiencia de Élite Global",
+      about_text1: "Soy Alfonso. Cuento con más de 6 años en IA y automatización, forjada en las sedes mundiales de Apple y Samsung.",
+      about_text2: "Ingeniero de Telecomunicaciones con Premio a la Excelencia en MBA, aplico visión estratégica a cada agente.",
+      contact_label: "Conecta", contact_title: "Hablemos de tu Proyecto"
     },
     en: {
-      page_title: "ForcenAI — Claude-Powered AI Agent Consultancy",
-      meta_description: "ForcenAI specialises in Claude-powered automation — custom agents, multi-agent dispatch systems, and MCP integrations.",
-      nav_services: "Services",
-      nav_process: "Process",
-      nav_about: "About",
-      nav_contact: "Contact",
-      nav_cta: "Start a Project",
-      nav_linkedin: "LinkedIn",
-      lang_es: "🇪🇸 ES",
-      lang_en: "🇬🇧 EN",
-      hero_badge: "Claude-Powered AI Consultancy",
+      nav_services: "Services", nav_process: "Process", nav_about: "Track Record", nav_contact: "Contact", nav_cta: "Get Started",
+      hero_badge: "Executive AI Agent Consultancy",
       hero_title: "We Build AI Agents That Work<br/><span>While You Sleep</span>",
-      hero_sub: "ForcenAI specialises in Claude-powered automation — custom agents, multi-agent dispatch systems, and MCP integrations for businesses that want to move faster.",
-      hero_cta_primary: "See Our Services",
-      hero_cta_secondary: "View Case Studies",
-      services_label: "What We Do",
-      services_title: "Services Built Around<br/>Agentic AI",
-      services_sub: "From a single automation to enterprise-scale multi-agent pipelines — we deliver production-ready Claude integrations.",
-      service1_title: "AI Agent Creation",
-      service1_desc: "Custom Claude-powered agents that handle complex workflows autonomously. From single-purpose bots to full agentic systems.",
-      service2_title: "Dispatch Architecture",
-      service2_desc: "Multi-agent orchestration systems that route tasks intelligently across specialised agents — just like Claude's own Dispatch.",
-      service3_title: "Claude Integration",
-      service3_desc: "Embed Claude into your existing products, APIs, and internal tools. Fast deployment, production-ready from day one.",
-      service4_title: "MCP Development",
-      service4_desc: "Custom Model Context Protocol servers that give your agents access to any system, database, or API you already use.",
-      service5_title: "AI Strategy Consulting",
-      service5_desc: "Roadmaps and frameworks to identify where AI agents deliver the most ROI in your organisation's workflows.",
-      service6_title: "Training & Enablement",
-      service6_desc: "Upskill your team to work alongside AI agents effectively. Workshops, playbooks, and ongoing support to keep pace.",
-      why_label: "Our Foundation",
-      why_title: "Why We Build on Claude",
-      why_sub: "Not all models are equal when it comes to agentic work. We chose Claude for every reason that matters.",
-      why_card1_title: "Safest & Most Capable",
-      why_card1_desc: "Claude consistently leads safety benchmarks without sacrificing performance. It reasons carefully, refuses appropriately, and stays on task.",
-      why_card2_title: "Best for Agents",
-      why_card2_desc: "Claude's long context window, tool use fidelity, and instruction-following make it uniquely suited to autonomous, multi-step agentic tasks.",
-      why_card3_title: "Enterprise-Ready",
-      why_card3_desc: "Anthropic's enterprise tier offers the controls, compliance guarantees, and SLAs that serious organisations need before deploying at scale.",
-      process_label: "How We Work",
-      process_title: "From Idea to Deployed Agent",
-      process_sub: "A clear, collaborative process built for speed without cutting corners.",
-      step1_title: "Discover",
-      step1_desc: "We map your workflows, identify automation opportunities, and define scope with clear success metrics.",
-      step2_title: "Architect",
-      step2_desc: "We design the agent system — tools, prompts, memory strategy, and integration points — before writing a line of code.",
-      step3_title: "Build & Test",
-      step3_desc: "Iterative development with continuous eval loops. Every agent is stress-tested on edge cases before handoff.",
-      step4_title: "Deploy & Monitor",
-      step4_desc: "We ship to production, set up observability dashboards, and provide ongoing optimisation support post-launch.",
-      about_label: "About",
-      about_title: "Hola, I'm <span style=\"color:var(--accent)\">Alfonso</span>",
-      about_text1: "I'm the founder of ForcenAI — an AI agent consultancy focused exclusively on Claude-powered systems. I've spent years working at the intersection of software engineering and applied AI, and I started ForcenAI to help businesses move beyond chatbots into real agentic automation.",
-      about_text2: "Whether it's a single workflow agent or a complex multi-agent dispatch system, every project gets my direct attention. <strong>Quality over volume.</strong>",
-      about_text3: "📍 <strong>Based in Zaragoza, Spain.</strong> Working with teams globally — remote-first, async-friendly.",
-      stat1_label: "Agents Deployed",
-      stat2_label: "Claude-Powered",
-      stat3_label: "Client Reach",
-      contact_label: "Get in Touch",
-      contact_title: "Let's Build Something<br/><span style=\"color:var(--accent)\">Together</span>",
-      contact_sub: "Have a workflow that needs automating? A product that needs Claude embedded? Or just want to explore what's possible? Drop a message and I'll get back to you within 24 hours.",
-      form_name: "Your Name",
-      form_company: "Company (Optional)",
-      form_email: "Email Address",
-      form_message: "Message",
-      form_message_default: "Hello Alfonso, I'd like to talk about how ForcenAI can help me with...",
-      form_submit: "Send Message →",
-      form_success: "✓ Message received! I'll be in touch within 24 hours.",
-      footer_tagline: "Building the agentic future, one workflow at a time.",
-      footer_copy: "© 2026 ForcenAI. All rights reserved. Built with Claude."
+      hero_sub: "Scaling enterprises with corporate-grade automation. Proven expertise at Apple and Samsung Global HQ to deploy Claude-powered ecosystems.",
+      hero_cta_primary: "Explore Services",
+      services_label: "Expertise", services_title: "Agentic AI Services", services_sub: "Intelligent ecosystems orchestrated with corporate-grade rigor.",
+      service1_title: "AI Agent Creation", service1_desc: "Autonomous agents that handle complex workflows without manual input.",
+      service2_title: "Claude Integration", service2_desc: "Expert implementation into existing systems for high-performance operations.",
+      service3_title: "AI Strategy", service3_desc: "High-level consulting to identify automation opportunities with maximum ROI.",
+      service4_title: "Team Training", service4_desc: "Specialized training to help your team master AI agents in daily workflows.",
+      why_label: "Our Foundation", why_title: "Why Claude",
+      process_label: "Workflow", process_title: "From Concept to Deployment",
+      step1_title: "Discover", step2_title: "Architect", step3_title: "Build", step4_title: "Scale",
+      about_label: "Track Record", about_title: "Elite Global AI Expertise",
+      about_text1: "I'm Alfonso. I bring 6+ years of AI and automation experience, forged at Apple EMEIA HQ and Samsung Regional HQ.",
+      about_text2: "Telecommunications Engineer with an MBA Excellence Award, applying corporate rigor to every AI agent.",
+      contact_label: "Connect", contact_title: "Let's Scale Your Potential"
     }
   };
 
   function setLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (translations[lang] && translations[lang][key]) {
-        el.innerHTML = translations[lang][key];
-      }
+      if (translations[lang][key]) el.innerHTML = translations[lang][key];
     });
-
-    // Update Page Title and Meta Description
-    if (translations[lang].page_title) document.title = translations[lang].page_title;
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc && translations[lang].meta_description) {
-      metaDesc.setAttribute('content', translations[lang].meta_description);
-    }
-
-    // Update form placeholders
-    const nameInput = document.getElementById('name');
-    const companyInput = document.getElementById('company');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-
-    if (lang === 'es') {
-      if (nameInput) nameInput.placeholder = "Tu Nombre Completo";
-      if (companyInput) companyInput.placeholder = "Tu Empresa";
-      if (emailInput) emailInput.placeholder = "correo@ejemplo.com";
-      if (messageInput) {
-        messageInput.placeholder = "Cuéntame sobre tu proyecto o flujo de trabajo...";
-        if (messageInput.value === translations['en'].form_message_default) {
-           messageInput.value = translations['es'].form_message_default;
-        }
-      }
-    } else {
-      if (nameInput) nameInput.placeholder = "Ada Lovelace";
-      if (companyInput) companyInput.placeholder = "Your Company";
-      if (emailInput) emailInput.placeholder = "ada@example.com";
-      if (messageInput) {
-        messageInput.placeholder = "Tell me about your project or workflow...";
-        if (messageInput.value === translations['es'].form_message_default) {
-           messageInput.value = translations['en'].form_message_default;
-        }
-      }
-    }
-    
-    // Also update hardcoded default message if user hasn't touched it
-    if (messageInput && !messageInput.value) {
-       messageInput.value = translations[lang].form_message_default;
-    }
-
-    // Update active states in all toggles
-    document.querySelectorAll('.lang-toggle button').forEach(btn => {
-      btn.classList.toggle('active', btn.id.includes(lang));
-    });
-
-    localStorage.setItem('preferredLang', lang);
-    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.id.includes(lang)));
+    localStorage.setItem('prefLang', lang);
   }
 
-  // Initialize
-  document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('preferredLang') || 'es';
-    setLanguage(savedLang);
-  });
+  window.onload = () => { setLanguage(localStorage.getItem('prefLang') || 'es'); };
 </script>
 </body>
 </html>
