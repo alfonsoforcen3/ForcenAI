@@ -129,7 +129,7 @@
     /* ── Integrations Carousel ── */
     .carousel-section { padding: 120px 0; background: #080808; overflow: hidden; position: relative; }
     .carousel-track-container { position: relative; width: 100%; display: flex; align-items: center; padding: 40px 0; }
-    .carousel-track { display: flex; width: max-content; gap: 24px; animation: scroll-infinite 40s linear infinite; }
+    .carousel-track { display: flex; width: max-content; gap: 24px; animation: scroll-infinite 60s linear infinite; }
     .carousel-track:hover { animation-play-state: paused; }
     @keyframes scroll-infinite { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .integration-card {
@@ -138,7 +138,8 @@
       gap: 14px; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px); flex-shrink: 0;
     }
     .integration-card:hover { border-color: var(--accent); transform: scale(1.08) translateY(-5px); background: rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-    .integration-card svg { height: 36px; width: 36px; fill: var(--accent); }
+    .integration-card svg { height: 42px; width: 42px; transition: transform 0.3s; }
+    .integration-card:hover svg { transform: scale(1.1); }
     .integration-card span { font-size: 14px; font-weight: 600; color: var(--muted); }
     .integration-card.others { border-style: dashed; }
     .integration-card.others span { color: var(--accent); }
@@ -266,7 +267,7 @@
       Construimos Agentes de IA que Trabajan<br/><span>Mientras Duermes</span>
     </h1>
     <p class="hero-sub fade-up delay-2" data-i18n="hero_sub">
-      Escalamos empresas con automatización de nivel corporativo. Experiencia probada en Apple y Samsung Global HQ para desplegar ecosistemas agénticos de Claude.
+      Escalamos empresas con automatización de nivel corporativo. Experiencia en Apple y Samsung HQ para desplegar Claude.
     </p>
     <div class="hero-btns fade-up delay-3">
       <a href="#services" class="btn btn-primary" data-i18n="hero_cta_primary">Explorar Servicios</a>
@@ -286,24 +287,65 @@
 
 <section class="carousel-section">
   <div class="container" style="margin-bottom: 20px; text-align: center;">
-    <p class="section-label">Ecosystem</p>
-    <h2 class="section-title">Seamless Automation</h2>
+    <p class="section-label" data-i18n="eco_label">Ecosystem</p>
+    <h2 class="section-title" data-i18n="eco_title">Seamless Automation</h2>
   </div>
   <div class="carousel-track-container">
     <div class="carousel-track">
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M4.15 4.3v15.4c0 .54.44.97.98.97h13.74c.54 0 .98-.43.98-.97V4.3c0-.54-.44-.97-.98-.97H5.13c-.54 0-.98.43-.98.97z"/><path d="M7.5 7h4v1.5h-4zM7.5 10h9v1.5h-9zM7.5 13h9v1.5h-9zM7.5 16h7v1.5h-7z" fill="var(--bg)"/></svg><span>Notion</span></div>
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span>Gmail</span></div>
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M6 12.5C6 11.12 7.12 10 8.5 10s2.5 11.12 2.5 12.5S9.88 25 8.5 25 6 23.88 6 22.5zM12.5 6C13.88 6 15 7.12 15 8.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5S11.12 6 12.5 6z"/></svg><span>Slack</span></div>
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg><span>HubSpot</span></div>
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5z"/></svg><span>Airtable</span></div>
-      <div class="integration-card others"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="var(--accent)" stroke-width="2"/></svg><span>Custom Tools</span></div>
-      <!-- Clones -->
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M4.15 4.3v15.4c0 .54.44.97.98.97h13.74c.54 0 .98-.43.98-.97V4.3c0-.54-.44-.97-.98-.97H5.13c-.54 0-.98.43-.98.97z"/><path d="M7.5 7h4v1.5h-4zM7.5 10h9v1.5h-9zM7.5 13h9v1.5h-9zM7.5 16h7v1.5h-7z" fill="var(--bg)"/></svg><span>Notion</span></div>
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span>Gmail</span></div>
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M6 12.5C6 11.12 7.12 10 8.5 10s2.5 11.12 2.5 12.5S9.88 25 8.5 25 6 23.88 6 22.5zM12.5 6C13.88 6 15 7.12 15 8.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5S11.12 6 12.5 6z"/></svg><span>Slack</span></div>
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg><span>HubSpot</span></div>
-      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5z"/></svg><span>Airtable</span></div>
-      <div class="integration-card others"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="var(--accent)" stroke-width="2"/></svg><span>Custom Tools</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FFFFFF" d="M4.15 4.3v15.4c0 .54.44.97.98.97h13.74c.54 0 .98-.43.98-.97V4.3c0-.54-.44-.97-.98-.97H5.13c-.54 0-.98.43-.98.97z"/><path d="M7.5 7h4v1.5h-4zM7.5 10h9v1.5h-9zM7.5 13h9v1.5h-9zM7.5 16h7v1.5h-7z" fill="#000000"/></svg><span>Notion</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M22.5 15.5V6.75C22.5 5.51 21.49 4.5 20.25 4.5H18V13.5L12 18L6 13.5V4.5H3.75C2.51 4.5 1.5 5.51 1.5 6.75V15.5C1.5 16.63 2.13 17.62 3.07 18.12L12 23.25L20.93 18.12C21.87 17.62 22.5 16.63 22.5 15.5Z" fill="#EA4335"/><path d="M18 4.5H15V13.5L12 15.75L9 13.5V4.5H6V13.5L12 18L18 13.5V4.5Z" fill="#FBBC04"/><path d="M12 15.75L15 13.5V4.5H12V15.75Z" fill="#34A853"/><path d="M12 15.75L9 13.5V4.5H12V15.75Z" fill="#4285F4"/></svg><span>Gmail</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M5 10.5C5 9.12 6.12 8 7.5 8S10 9.12 10 10.5V13H7.5C6.12 13 5 11.88 5 10.5Z" fill="#36C5F0"/><path d="M5 15.5C5 16.88 6.12 18 7.5 18S10 16.88 10 15.5v-2.5H7.5C6.12 13 5 14.12 5 15.5Z" fill="#2EB67D"/><path d="M16.5 8C17.88 8 19 9.12 19 10.5S17.88 13 16.5 13H14v-2.5C14 9.12 15.12 8 16.5 8Z" fill="#ECB22E"/><path d="M16.5 18C15.12 18 14 16.88 14 15.5V13h2.5C17.88 13 19 14.12 19 15.5S17.88 18 16.5 18Z" fill="#E01E5A"/></svg><span>Slack</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FF7A59" d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg><span>HubSpot</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#00A1E0" d="M18.5 7.5C17.3 7.5 16.2 8.1 15.5 9C15 7.3 13.5 6 11.7 6C9.9 6 8.3 7 7.6 8.5C6.7 8.1 5.6 8 4.6 8.4C2.5 9.2 1.5 11.5 2.3 13.6C2.6 14.4 3.2 15 3.9 15.4C3.8 15.6 3.8 15.8 3.8 16C3.8 17.7 5.2 19 6.8 19H17.2C18.8 19 20.2 17.7 20.2 16C20.2 14.3 18.8 13 17.2 13C17.2 12.9 17.2 12.8 17.2 12.7C17.2 9.8 18.2 7.5 18.5 7.5Z"/></svg><span>Salesforce</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="#18BFFF"/><path d="M2 17l10 5V12L2 7v10z" fill="#FFCF00"/><path d="M22 17V7l-10 5v10l10-5z" fill="#FF5E5E"/></svg><span>Airtable</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg><span>WhatsApp</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#5865F2" d="M19.27 4.57c-1.41-.65-2.9-1.15-4.47-1.47l-.23.47c-1.74-.5-3.56-.5-5.3 0l-.23-.47c-1.57.32-3.06.82-4.47 1.47-2.82 4.21-3.57 8.32-3.2 12.33 1.88 1.39 3.69 2.23 5.48 2.78l1.11-1.51c-.63-.24-1.24-.54-1.81-.9l.34-.23c3.41 1.57 7.15 1.57 10.56 0l.34.23c-.57.36-1.18.66-1.81.9l1.11 1.51c1.79-.55 3.6-1.39 5.48-2.78.46-4.66-.78-8.77-3.2-12.33zM9.01 13.92c-.93 0-1.7-1.11-1.7-2.48s.77-2.48 1.7-2.48 1.7 1.11 1.7 2.48-.77 2.48-1.7 2.48zm5.98 0c-.93 0-1.7-1.11-1.7-2.48s.77-2.48 1.7-2.48 1.7 1.11 1.7 2.48-.77 2.48-1.7 2.48z"/></svg><span>Discord</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FF4F00" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10zm-9.5-6.5l-4.5 7.5h3v5.5l4.5-7.5h-3v-5.5z"/></svg><span>Zapier</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#635BFF" d="M20 4H4C2.89 4 2 4.89 2 6v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-7 14h-2v-2h2v2zm0-4h-2V7h2v7z"/></svg><span>Stripe</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#95BF47" d="M12 2l-9.5 5 1.5 13 8 4 8-4 1.5-13L12 2zm-1 15.5l-3.5-2 1-5 2.5 1.5V17.5zm5-4.5l-3 1.5V9.5l3-1.5v4.5z"/></svg><span>Shopify</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#0079BF" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8.5 13c0 .55-.45 1-1 1h-2c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v9zm7 4c0 .55-.45 1-1 1h-2c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v13z"/></svg><span>Trello</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3" fill="#F06A6A"/><circle cx="7" cy="15" r="3" fill="#F06A6A"/><circle cx="17" cy="15" r="3" fill="#F06A6A"/></svg><span>Asana</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FFFFFF" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.7.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2V23c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg><span>GitHub</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M15.5 14h-7L4.25 7l3.5-6h7l4.25 7L15.5 14z" fill="#FFC107"/><path d="M11.5 14L15.5 21h-7l-4.25-7 4.25-7h7l-4.25 7z" fill="#4CAF50"/><path d="M8.5 14l-4.25-7 3.5-6h1.5l4.25 7-4.25 7z" fill="#2196F3"/></svg><span>Google Drive</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#006BFF" d="M19 4H5c-1.1 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-7 15l-4.5-4.5 1.5-1.5 3 3 6-6 1.5 1.5L12 19z"/></svg><span>Calendly</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#9C27B0" d="M12 2L2 7v10l10 5 10-5V7L12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg><span>Make.com</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4V4zm6 0h4v16h-4V4zm6 0h4v16h-4V4z" fill="#FF3D57"/></svg><span>Monday.com</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z" fill="#7B68EE"/></svg><span>ClickUp</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FFFFFF" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.5 12h5m-5 4h5m-5-8h5"/></svg><span>Typeform</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#0057FF" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg><span>Intercom</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M19 4H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" fill="#4285F4"/><path d="M7 11h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2zm-8 4h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" fill="#34A853"/></svg><span>Google Calendar</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" fill="#03363D"/><circle cx="12" cy="12" r="5" fill="#FFF"/></svg><span>Zendesk</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" fill="#0077B5"/></svg><span>LinkedIn</span></div>
+      <div class="integration-card others">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="var(--accent)" stroke-width="2"/></svg>
+        <span data-i18n="eco_custom">Tus Herramientas</span>
+      </div>
+
+      <!-- REPEAT FOR LOOP -->
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FFFFFF" d="M4.15 4.3v15.4c0 .54.44.97.98.97h13.74c.54 0 .98-.43.98-.97V4.3c0-.54-.44-.97-.98-.97H5.13c-.54 0-.98.43-.98.97z"/><path d="M7.5 7h4v1.5h-4zM7.5 10h9v1.5h-9zM7.5 13h9v1.5h-9zM7.5 16h7v1.5h-7z" fill="#000000"/></svg><span>Notion</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M22.5 15.5V6.75C22.5 5.51 21.49 4.5 20.25 4.5H18V13.5L12 18L6 13.5V4.5H3.75C2.51 4.5 1.5 5.51 1.5 6.75V15.5C1.5 16.63 2.13 17.62 3.07 18.12L12 23.25L20.93 18.12C21.87 17.62 22.5 16.63 22.5 15.5Z" fill="#EA4335"/><path d="M18 4.5H15V13.5L12 15.75L9 13.5V4.5H6V13.5L12 18L18 13.5V4.5Z" fill="#FBBC04"/><path d="M12 15.75L15 13.5V4.5H12V15.75Z" fill="#34A853"/><path d="M12 15.75L9 13.5V4.5H12V15.75Z" fill="#4285F4"/></svg><span>Gmail</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M5 10.5C5 9.12 6.12 8 7.5 8S10 9.12 10 10.5V13H7.5C6.12 13 5 11.88 5 10.5Z" fill="#36C5F0"/><path d="M5 15.5C5 16.88 6.12 18 7.5 18S10 16.88 10 15.5v-2.5H7.5C6.12 13 5 14.12 5 15.5Z" fill="#2EB67D"/><path d="M16.5 8C17.88 8 19 9.12 19 10.5S17.88 13 16.5 13H14v-2.5C14 9.12 15.12 8 16.5 8Z" fill="#ECB22E"/><path d="M16.5 18C15.12 18 14 16.88 14 15.5V13h2.5C17.88 13 19 14.12 19 15.5S17.88 18 16.5 18Z" fill="#E01E5A"/></svg><span>Slack</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FF7A59" d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg><span>HubSpot</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#00A1E0" d="M18.5 7.5C17.3 7.5 16.2 8.1 15.5 9C15 7.3 13.5 6 11.7 6C9.9 6 8.3 7 7.6 8.5C6.7 8.1 5.6 8 4.6 8.4C2.5 9.2 1.5 11.5 2.3 13.6C2.6 14.4 3.2 15 3.9 15.4C3.8 15.6 3.8 15.8 3.8 16C3.8 17.7 5.2 19 6.8 19H17.2C18.8 19 20.2 17.7 20.2 16C20.2 14.3 18.8 13 17.2 13C17.2 12.9 17.2 12.8 17.2 12.7C17.2 9.8 18.2 7.5 18.5 7.5Z"/></svg><span>Salesforce</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="#18BFFF"/><path d="M2 17l10 5V12L2 7v10z" fill="#FFCF00"/><path d="M22 17V7l-10 5v10l10-5z" fill="#FF5E5E"/></svg><span>Airtable</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg><span>WhatsApp</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#5865F2" d="M19.27 4.57c-1.41-.65-2.9-1.15-4.47-1.47l-.23.47c-1.74-.5-3.56-.5-5.3 0l-.23-.47c-1.57.32-3.06.82-4.47 1.47-2.82 4.21-3.57 8.32-3.2 12.33 1.88 1.39 3.69 2.23 5.48 2.78l1.11-1.51c-.63-.24-1.24-.54-1.81-.9l.34-.23c3.41 1.57 7.15 1.57 10.56 0l.34.23c-.57.36-1.18.66-1.81.9l1.11 1.51c1.79-.55 3.6-1.39 5.48-2.78.46-4.66-.78-8.77-3.2-12.33zM9.01 13.92c-.93 0-1.7-1.11-1.7-2.48s.77-2.48 1.7-2.48 1.7 1.11 1.7 2.48-.77 2.48-1.7 2.48zm5.98 0c-.93 0-1.7-1.11-1.7-2.48s.77-2.48 1.7-2.48 1.7 1.11 1.7 2.48-.77 2.48-1.7 2.48z"/></svg><span>Discord</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FF4F00" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10zm-9.5-6.5l-4.5 7.5h3v5.5l4.5-7.5h-3v-5.5z"/></svg><span>Zapier</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#635BFF" d="M20 4H4C2.89 4 2 4.89 2 6v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-7 14h-2v-2h2v2zm0-4h-2V7h2v7z"/></svg><span>Stripe</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#95BF47" d="M12 2l-9.5 5 1.5 13 8 4 8-4 1.5-13L12 2zm-1 15.5l-3.5-2 1-5 2.5 1.5V17.5zm5-4.5l-3 1.5V9.5l3-1.5v4.5z"/></svg><span>Shopify</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#0079BF" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8.5 13c0 .55-.45 1-1 1h-2c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v9zm7 4c0 .55-.45 1-1 1h-2c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v13z"/></svg><span>Trello</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3" fill="#F06A6A"/><circle cx="7" cy="15" r="3" fill="#F06A6A"/><circle cx="17" cy="15" r="3" fill="#F06A6A"/></svg><span>Asana</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FFFFFF" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.7.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2V23c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg><span>GitHub</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M15.5 14h-7L4.25 7l3.5-6h7l4.25 7L15.5 14z" fill="#FFC107"/><path d="M11.5 14L15.5 21h-7l-4.25-7 4.25-7h7l-4.25 7z" fill="#4CAF50"/><path d="M8.5 14l-4.25-7 3.5-6h1.5l4.25 7-4.25 7z" fill="#2196F3"/></svg><span>Google Drive</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#006BFF" d="M19 4H5c-1.1 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-7 15l-4.5-4.5 1.5-1.5 3 3 6-6 1.5 1.5L12 19z"/></svg><span>Calendly</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#9C27B0" d="M12 2L2 7v10l10 5 10-5V7L12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg><span>Make.com</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4V4zm6 0h4v16h-4V4zm6 0h4v16h-4V4z" fill="#FF3D57"/></svg><span>Monday.com</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z" fill="#7B68EE"/></svg><span>ClickUp</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#FFFFFF" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.5 12h5m-5 4h5m-5-8h5"/></svg><span>Typeform</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path fill="#0057FF" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg><span>Intercom</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M19 4H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" fill="#4285F4"/><path d="M7 11h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2zm-8 4h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" fill="#34A853"/></svg><span>Google Calendar</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" fill="#03363D"/><circle cx="12" cy="12" r="5" fill="#FFF"/></svg><span>Zendesk</span></div>
+      <div class="integration-card"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" fill="#0077B5"/></svg><span>LinkedIn</span></div>
     </div>
   </div>
 </section>
@@ -327,7 +369,7 @@
       <div class="service-card fade-up delay-2">
         <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
         <h3 data-i18n="service3_title">Estrategia de IA</h3>
-        <p data-i18n="service3_desc">Consultoría de alto nivel para identificar oportunidades con máximo retorno de inversión (ROI).</p>
+        <p data-i18n="service3_desc">Consultoría estratégica para identificar oportunidades con máximo retorno de inversión (ROI).</p>
       </div>
       <div class="service-card fade-up delay-3">
         <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15"/></svg></div>
@@ -345,9 +387,9 @@
       <h2 class="section-title" data-i18n="why_title">Why Claude</h2>
     </div>
     <div class="why-grid">
-      <div class="why-card fade-up"><h3>Security First</h3><p data-i18n="why_card1_desc">Claude leads benchmarks in safety and reasoning, essential for enterprise deployments.</p></div>
-      <div class="why-card fade-up delay-1"><h3>Agent Native</h3><p data-i18n="why_card2_desc">Built with long context and tool fidelity that makes autonomous agents reliable.</p></div>
-      <div class="why-card fade-up delay-2"><h3>Scalability</h3><p data-i18n="why_card3_desc">Enterprise-grade SLAs and protocol support via MCP for seamless data access.</p></div>
+      <div class="why-card fade-up"><h3 data-i18n="why_card1_title">Security First</h3><p data-i18n="why_card1_desc">Claude leads benchmarks in safety and reasoning, essential for enterprise deployments.</p></div>
+      <div class="why-card fade-up delay-1"><h3 data-i18n="why_card2_title">Agent Native</h3><p data-i18n="why_card2_desc">Built with long context and tool fidelity that makes autonomous agents reliable.</p></div>
+      <div class="why-card fade-up delay-2"><h3 data-i18n="why_card3_title">Scalability</h3><p data-i18n="why_card3_desc">Enterprise-grade SLAs and protocol support via MCP for seamless data access.</p></div>
     </div>
   </div>
 </section>
@@ -357,10 +399,10 @@
     <p class="section-label" data-i18n="process_label">Workflow</p>
     <h2 class="section-title" data-i18n="process_title">Propelled to Deployment</h2>
     <div class="process-steps">
-      <div class="process-step fade-up"><div class="step-num">01</div><h3 class="step-title" data-i18n="step1_title">Discover</h3><p class="step-desc">Mapping workflows and defining success metrics.</p></div>
-      <div class="process-step fade-up delay-1"><div class="step-num">02</div><h3 class="step-title" data-i18n="step2_title">Architect</h3><p class="step-desc">Designing the agent logic, tools, and memory stacks.</p></div>
-      <div class="process-step fade-up delay-2"><div class="step-num">03</div><h3 class="step-title" data-i18n="step3_title">Build</h3><p class="step-desc">Full development with rigorous stress-testing loops.</p></div>
-      <div class="process-step fade-up delay-3"><div class="step-num">04</div><h3 class="step-title" data-i18n="step4_title">Monitor</h3><p class="step-desc">Launch and ongoing optimization for maximum ROI.</p></div>
+      <div class="process-step fade-up"><div class="step-num">01</div><h3 class="step-title" data-i18n="step1_title">Discover</h3><p class="step-desc" data-i18n="step1_desc">Mapping workflows and defining success metrics.</p></div>
+      <div class="process-step fade-up delay-1"><div class="step-num">02</div><h3 class="step-title" data-i18n="step2_title">Architect</h3><p class="step-desc" data-i18n="step2_desc">Designing the agent logic, tools, and memory stacks.</p></div>
+      <div class="process-step fade-up delay-2"><div class="step-num">03</div><h3 class="step-title" data-i18n="step3_title">Build</h3><p class="step-desc" data-i18n="step3_desc">Full development with rigorous stress-testing loops.</p></div>
+      <div class="process-step fade-up delay-3"><div class="step-num">04</div><h3 class="step-title" data-i18n="step4_title">Monitor</h3><p class="step-desc" data-i18n="step4_desc">Launch and ongoing optimization for maximum ROI.</p></div>
     </div>
   </div>
 </section>
@@ -377,12 +419,12 @@
       <div class="about-text fade-up delay-1">
         <p class="section-label" data-i18n="about_label">Trayectoria</p>
         <h2 class="section-title" data-i18n="about_title">Elite AI Expertise</h2>
-        <p data-i18n="about_text1">Soy Alfonso, fundador de ForcenAI. Con más de 6 años de experiencia en IA y automatización, he trabajado en las sedes mundiales de <strong>Apple (EMEIA HQ)</strong> y actualmente en <strong>Samsung (Regional HQ)</strong>.</p>
-        <p data-i18n="about_text2">Ingeniero de Telecomunicaciones con un MBA galardonado con el Premio a la Excelencia, aplico rigor corporativo a cada agente que construimos.</p>
+        <p data-i18n="about_text1">Soy Alfonso. Cuento con más de 6 años en IA y automatización, forjada en las sedes mundiales de Apple y Samsung.</p>
+        <p data-i18n="about_text2">Ingeniero de Telecomunicaciones con Premio a la Excelencia en MBA, aplico rigor corporativo a cada agente.</p>
         <div class="about-stats">
-          <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Years AI exp</span></div>
-          <div class="stat"><span class="stat-num">ICEX</span><span class="stat-label">Award MBA</span></div>
-          <div class="stat"><span class="stat-num">Global</span><span class="stat-label">Reach</span></div>
+          <div class="stat"><span class="stat-num">6+</span><span class="stat-label" data-i18n="stat1" style="display:inline-block;">Years AI exp</span></div>
+          <div class="stat"><span class="stat-num">ICEX</span><span class="stat-label" data-i18n="stat2" style="display:inline-block;">Award MBA</span></div>
+          <div class="stat"><span class="stat-num">Global</span><span class="stat-label" data-i18n="stat3" style="display:inline-block;">Reach</span></div>
         </div>
       </div>
     </div>
@@ -398,11 +440,11 @@
         <div class="contact-methods">
           <a href="mailto:alforcen2@gmail.com" class="contact-method">
             <div class="contact-method-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div class="contact-method-text"><h4>Email Direct</h4><p>alforcen2@gmail.com</p></div>
+            <div class="contact-method-text"><h4 data-i18n="method_email">Email Direct</h4><p>alforcen2@gmail.com</p></div>
           </a>
           <a href="https://wa.me/34658207812" target="_blank" class="contact-method">
-            <div class="contact-method-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-            <div class="contact-method-text"><h4>WhatsApp</h4><p>+34 658 207 812</p></div>
+            <div class="contact-method-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg></div>
+            <div class="contact-method-text"><h4 data-i18n="method_whatsapp">WhatsApp</h4><p>+34 658 207 812</p></div>
           </a>
         </div>
       </div>
@@ -412,8 +454,8 @@
           <input type="text" name="company" id="company" placeholder="Empresa (opcional)" />
           <input type="email" name="email" id="email" placeholder="Email corporativo" required />
           <textarea name="message" id="message" placeholder="¿Cómo podemos ayudarte?" required></textarea>
-          <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
-          <div id="formSuccess" style="display:none; color:var(--accent); margin-top:15px; font-weight:600;">✓ Mensaje enviado. Responderemos en menos de 24h.</div>
+          <button type="submit" class="btn btn-primary" data-i18n="contact_submit">Enviar Mensaje</button>
+          <div id="formSuccess" style="display:none; color:var(--accent); margin-top:15px; font-weight:600;" data-i18n="contact_success">✓ Mensaje enviado. Responderemos en menos de 24h.</div>
         </form>
       </div>
     </div>
@@ -473,26 +515,36 @@
   document.getElementById('mobileClose').onclick = () => mm.classList.remove('active');
   document.querySelectorAll('.mobile-link').forEach(l => l.onclick = () => mm.classList.remove('active'));
 
-  // Multi-language
+  // Multi-language Logic & Data
   const translations = {
     es: {
       nav_services: "Servicios", nav_process: "Proceso", nav_about: "Trayectoria", nav_contact: "Contacto", nav_cta: "Comenzar",
-      hero_badge: "Executive AI Agent Consultancy",
+      hero_badge: "Consultoría de Agentes de IA",
       hero_title: "Construimos Agentes de IA que Trabajan<br/><span>Mientras Duermes</span>",
-      hero_sub: "Escalamos empresas con automatización de nivel corporativo. Experiencia probada en Apple y Samsung HQ para desplegar ecosistemas de Claude.",
+      hero_sub: "Escalamos empresas con automatización de nivel corporativo. Experiencia en Apple y Samsung HQ para desplegar Claude.",
       hero_cta_primary: "Explorar Servicios",
-      services_label: "Expertise", services_title: "Servicios de IA Agéntica", services_sub: "Ecosistemas inteligentes orquestados con rigor corporativo.",
-      service1_title: "Creación de Agentes", service1_desc: "Agentes autónomos que ejecutan flujos de trabajo complejos sin intervención.",
-      service2_title: "Integración de Claude", service2_desc: "Implementación experta en sistemas existentes para operativa de alta seguridad.",
-      service3_title: "Estrategia de IA", service3_desc: "Consultoría estratégica para identificar automatizaciones con máximo ROI.",
-      service4_title: "Formación de Equipos", service4_desc: "Capacitación de alto nivel para dominar la IA en el flujo de trabajo diario.",
-      why_label: "Nuestro Pilar", why_title: "Por qué Claude",
-      process_label: "Workflow", process_title: "Del Concepto al Despliegue",
-      step1_title: "Descubrir", step2_title: "Arquitectar", step3_title: "Construir", step4_title: "Optimizar",
-      about_label: "Trayectoria", about_title: "Experiencia de Élite Global",
+      services_label: "Especialidad", services_title: "Servicios de IA Agéntica", services_sub: "Ecosistemas inteligentes orquestados con rigor corporativo.",
+      service1_title: "Creación de Agentes", service1_desc: "Agentes autónomos personalizados que manejan flujos complejos.",
+      service2_title: "Integración de Claude", service2_desc: "Implementación experta en sistemas existentes para operativa segura.",
+      service3_title: "Estrategia de IA", service3_desc: "Consultoría estratégica para identificar oportunidades con máximo ROI.",
+      service4_title: "Formación de Equipos", service4_desc: "Capacitación especializada para dominar agentes de IA diariamente.",
+      why_label: "Nuestra Base", why_title: "Por qué Claude",
+      why_card1_title: "Seguridad Primero", why_card1_desc: "Claude lidera en seguridad y razonamiento, clave para empresas.",
+      why_card2_title: "Nativo Agéntico", why_card2_desc: "Contexto extenso y fidelidad de herramientas para agentes fiables.",
+      why_card3_title: "Escalabilidad", why_card3_desc: "SLAs corporativos y soporte MCP para acceso continuo a datos.",
+      process_label: "Flujo de Trabajo", process_title: "Del Concepto al Despliegue",
+      step1_title: "Descubrir", step1_desc: "Mapeo de flujos y definición de métricas de éxito.",
+      step2_title: "Arquitectar", step2_desc: "Arquitectura de lógica de agentes y pilas de memoria.",
+      step3_title: "Construir", step3_desc: "Desarrollo completo con ciclos de pruebas de estrés rigurosos.",
+      step4_title: "Optimizar", step4_desc: "Lanzamiento y mejora continua para un ROI máximo.",
+      about_label: "Trayectoria", about_title: "Experto en IA de Élite Global",
       about_text1: "Soy Alfonso. Cuento con más de 6 años en IA y automatización, forjada en las sedes mundiales de Apple y Samsung.",
-      about_text2: "Ingeniero de Telecomunicaciones con Premio a la Excelencia en MBA, aplico visión estratégica a cada agente.",
-      contact_label: "Conecta", contact_title: "Hablemos de tu Proyecto"
+      about_text2: "Ingeniero de Telecomunicaciones con Premio a la Excelencia en MBA, aplico rigor corporativo a cada agente.",
+      stat1: "Años Exp. IA", stat2: "Premio MBA", stat3: "Alcance Global",
+      contact_label: "Conectar", contact_title: "Hablemos de tu Proyecto",
+      method_email: "Email Directo", method_whatsapp: "WhatsApp",
+      contact_submit: "Enviar Mensaje", contact_success: "✓ Mensaje enviado. Responderemos en menos de 24h.",
+      eco_label: "Ecosistema", eco_title: "Automatización Fluida", eco_custom: "Tus Herramientas"
     },
     en: {
       nav_services: "Services", nav_process: "Process", nav_about: "Track Record", nav_contact: "Contact", nav_cta: "Get Started",
@@ -506,25 +558,61 @@
       service3_title: "AI Strategy", service3_desc: "High-level consulting to identify automation opportunities with maximum ROI.",
       service4_title: "Team Training", service4_desc: "Specialized training to help your team master AI agents in daily workflows.",
       why_label: "Our Foundation", why_title: "Why Claude",
-      process_label: "Workflow", process_title: "From Concept to Deployment",
-      step1_title: "Discover", step2_title: "Architect", step3_title: "Build", step4_title: "Scale",
+      why_card1_title: "Security First", why_card1_desc: "Claude leads benchmarks in safety and reasoning, essential for enterprise deployments.",
+      why_card2_title: "Agent Native", why_card2_desc: "Built with long context and tool fidelity that makes autonomous agents reliable.",
+      why_card3_title: "Scalability", why_card3_desc: "Enterprise-grade SLAs and protocol support via MCP for seamless data access.",
+      process_label: "Workflow", process_title: "Propelled to Deployment",
+      step1_title: "Discover", step1_desc: "Mapping workflows and defining success metrics.",
+      step2_title: "Architect", step2_desc: "Designing the agent logic, tools, and memory stacks.",
+      step3_title: "Build", step3_desc: "Full development with rigorous stress-testing loops.",
+      step4_title: "Monitor", step4_desc: "Launch and ongoing optimization for maximum ROI.",
       about_label: "Track Record", about_title: "Elite Global AI Expertise",
       about_text1: "I'm Alfonso. I bring 6+ years of AI and automation experience, forged at Apple EMEIA HQ and Samsung Regional HQ.",
       about_text2: "Telecommunications Engineer with an MBA Excellence Award, applying corporate rigor to every AI agent.",
-      contact_label: "Connect", contact_title: "Let's Scale Your Potential"
+      stat1: "Years AI exp", stat2: "Award MBA", stat3: "Global Reach",
+      contact_label: "Connect", contact_title: "Let's Scale Your Potential",
+      method_email: "Email Direct", method_whatsapp: "WhatsApp",
+      contact_submit: "Send Message", contact_success: "✓ Message sent. We will reply within 24h.",
+      eco_label: "Ecosystem", eco_title: "Seamless Automation", eco_custom: "Your Custom Tools"
     }
   };
 
   function setLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (translations[lang][key]) el.innerHTML = translations[lang][key];
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
     });
-    document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.id.includes(lang)));
+
+    // Update form placeholders based on language
+    const nameInput = document.getElementById('name');
+    const companyInput = document.getElementById('company');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+
+    if (lang === 'es') {
+      if (nameInput) nameInput.placeholder = "Nombre completo";
+      if (companyInput) companyInput.placeholder = "Empresa (opcional)";
+      if (emailInput) emailInput.placeholder = "Email corporativo";
+      if (messageInput) messageInput.placeholder = "¿Cómo podemos ayudarte?";
+    } else {
+      if (nameInput) nameInput.placeholder = "Full Name";
+      if (companyInput) companyInput.placeholder = "Company (optional)";
+      if (emailInput) emailInput.placeholder = "Corporate Email";
+      if (messageInput) messageInput.placeholder = "How can we help you?";
+    }
+
+    // Toggle active classes on buttons
+    document.querySelectorAll('#btn-es, #btn-es-mob').forEach(b => b.classList.toggle('active', lang === 'es'));
+    document.querySelectorAll('#btn-en, #btn-en-mob').forEach(b => b.classList.toggle('active', lang === 'en'));
+    
     localStorage.setItem('prefLang', lang);
   }
 
-  window.onload = () => { setLanguage(localStorage.getItem('prefLang') || 'es'); };
+  window.onload = () => { 
+    setLanguage(localStorage.getItem('prefLang') || 'es'); 
+  };
 </script>
 </body>
 </html>
